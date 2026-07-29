@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Brand Tokens - Light */
+  --brand-primary: #0140A7;
+  --brand-primary-dark: #0A4870;
+  --brand-primary-light: #DCEBF6;
+
+  --brand-secondary: #E6A500;
+  --brand-secondary-dark: #C98F00;
+  --brand-secondary-light: #FFF3CC;
+
+  --bg-default: #F7F8FA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-variant: #F1F3F5;
+
+  --text-primary: #1D1D1F;
+  --text-secondary: #555B63;
+  --text-tertiary: #8B9098;
+  --text-on-primary: #FFFFFF;
+  --text-on-secondary: #FFFFFF;
+
+  --border-default: #D9DEE5;
+
+  --status-success: #2E7D32;
+  --status-warning: #F59E0B;
+  --status-error: #D32F2F;
+  --status-info: #0288D1;
+
+  --background: var(--bg-default);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --border-color: var(--border-default);
+}
+
+.dark {
+  /* Brand Tokens - Dark */
+  --bg-default: #0D1117;
+  --bg-surface: #161B22;
+  --bg-surface-variant: #21262D;
+
+  --text-primary: #F0F2F5;
+  --text-secondary: #C9D1D9;
+  --text-tertiary: #8B949E;
+
+  --border-default: #30363D;
+
+  --brand-primary-light: #0A4870;
+  --brand-secondary-light: #3D2E00;
+
+  --background: var(--bg-default);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --border-color: var(--border-default);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
