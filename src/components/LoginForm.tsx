@@ -64,8 +64,8 @@ export function LoginForm() {
                       ? "#0A4870"
                       : "#DCEBF6"
                     : theme === "dark"
-                    ? "#21262D"
-                    : "#F7F8FA",
+                      ? "#21262D"
+                      : "#F7F8FA",
                   borderColor: isSelected ? "#0140A7" : theme === "dark" ? "#30363D" : "#D9DEE5",
                   color: isSelected ? "#0140A7" : "inherit",
                 }}
@@ -140,7 +140,7 @@ export function LoginForm() {
           color: theme === "dark" ? "#C9D1D9" : "#C98F00",
         }}
       >
-        🔒 Protected under Ethiopian Athletics Federation Governance &amp; Proclamation No. 1284/2023.
+        🔒 Protected under Ethiopian Athletics Federation Digital Security Standards.
       </div>
     </div>
   );

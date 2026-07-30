@@ -50,43 +50,21 @@ export function Header({ onMenuToggle }: HeaderProps) {
         </div>
       </div>
 
-      {/* Right side: Controls, Theme Switcher & User Profile */}
+      {/* Right side: Theme Switcher & User Profile */}
       <div className="flex items-center gap-3">
-        {/* Fayda System Status Badge */}
-        <div
-          className="hidden sm:flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold"
-          style={{
-            backgroundColor: theme === "dark" ? "rgba(1, 64, 167, 0.2)" : "#DCEBF6",
-            color: "#0140A7",
-            border: "1px solid rgba(1, 64, 167, 0.3)",
-          }}
-        >
-          <span className="h-2.5 w-2.5 rounded-full animate-pulse bg-[#2E7D32]" />
-          <span className="font-mono text-xs font-bold">FAYDA ID ONLINE</span>
-        </div>
 
-        {/* LIGHT / DARK THEME TOGGLE BUTTON (No "Bright" text) */}
+        {/* Theme Toggle - Icon Only */}
         <button
           onClick={toggleTheme}
-          className="flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-bold transition-all shadow-sm border"
+          className="flex items-center justify-center rounded-lg p-2 text-base transition-all border hover:scale-105 opacity-70 hover:opacity-90"
           style={{
-            backgroundColor: theme === "dark" ? "#21262D" : "#F1F3F5",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-            color: theme === "dark" ? "#F0F2F5" : "#1D1D1F",
+            backgroundColor: theme === "dark" ? "#1C2128" : "#F6F8FA",
+            borderColor: theme === "dark" ? "#373E47" : "#D0D7DE",
+            color: theme === "dark" ? "#8B949E" : "#656D76",
           }}
           title={`Switch to ${theme === "light" ? "Dark" : "Light"} Mode`}
         >
-          {theme === "light" ? (
-            <>
-              <span className="text-sm">🌙</span>
-              <span className="hidden md:inline font-semibold text-xs">Dark Mode</span>
-            </>
-          ) : (
-            <>
-              <span className="text-sm">☀️</span>
-              <span className="hidden md:inline font-semibold text-xs">Light Mode</span>
-            </>
-          )}
+          {theme === "light" ? "🌙" : "☀️"}
         </button>
 
         {user ? (

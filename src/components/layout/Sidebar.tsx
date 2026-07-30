@@ -113,13 +113,13 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
                 style={
                   isActive
                     ? {
-                        backgroundColor: theme === "dark" ? "#0A4870" : "#DCEBF6",
-                        color: "#0140A7",
-                        fontWeight: 600,
-                      }
+                      backgroundColor: theme === "dark" ? "#0A4870" : "#DCEBF6",
+                      color: "#0140A7",
+                      fontWeight: 600,
+                    }
                     : {
-                        color: theme === "dark" ? "#C9D1D9" : "#555B63",
-                      }
+                      color: theme === "dark" ? "#C9D1D9" : "#555B63",
+                    }
                 }
               >
                 <span style={{ color: isActive ? "#0140A7" : "inherit" }}>
@@ -134,7 +134,7 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
 
       {/* Clean Footer Info */}
       <div
-        className="p-3 m-3 rounded-lg border text-[11px] space-y-0.5"
+        className="p-3 m-3 rounded-lg border text-[11px]"
         style={{
           backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
           borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
@@ -144,7 +144,7 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
         <p className="font-semibold text-xs" style={{ color: theme === "dark" ? "#F0F2F5" : "#1D1D1F" }}>
           EACRMS Federation Portal
         </p>
-        <p className="text-[10px]">Fayda ID Integrated • Proclamation 1284/2023</p>
+        <p className="text-[10px]">Official EAF Administration System</p>
       </div>
     </div>
   );

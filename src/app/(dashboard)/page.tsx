@@ -77,7 +77,7 @@ export default function FederationDashboardPage() {
               EXECUTIVE COMMAND DASHBOARD
             </span>
             <span className="text-xs font-mono text-[#8B9098]">•</span>
-            <span className="text-xs font-mono text-[#2E7D32] font-bold">PROCLAMATION NO. 1284/2023</span>
+            <span className="text-xs font-mono text-[#2E7D32] font-bold">SYSTEM ACTIVE</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Welcome back, {user?.name}
@@ -119,10 +119,9 @@ export default function FederationDashboardPage() {
         {statCards.map((card) => (
           <div
             key={card.title}
-            className="rounded-2xl p-5 border shadow-sm transition-colors space-y-3"
+            className="rounded-2xl p-5 shadow-lg transition-all hover:shadow-xl space-y-3"
             style={{
               backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-              borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
             }}
           >
             <div className="flex items-center justify-between">
@@ -151,10 +150,9 @@ export default function FederationDashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Link
           href="/verification"
-          className="group rounded-2xl p-6 border transition-all hover:border-[#0140A7] shadow-sm flex flex-col justify-between space-y-4"
+          className="group rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4"
           style={{
             backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
           }}
         >
           <div className="space-y-2">
@@ -175,10 +173,9 @@ export default function FederationDashboardPage() {
 
         <Link
           href="/events"
-          className="group rounded-2xl p-6 border transition-all hover:border-[#0140A7] shadow-sm flex flex-col justify-between space-y-4"
+          className="group rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4"
           style={{
             backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
           }}
         >
           <div className="space-y-2">
@@ -199,10 +196,9 @@ export default function FederationDashboardPage() {
 
         <Link
           href="/results"
-          className="group rounded-2xl p-6 border transition-all hover:border-[#0140A7] shadow-sm flex flex-col justify-between space-y-4"
+          className="group rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4"
           style={{
             backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
           }}
         >
           <div className="space-y-2">
@@ -222,76 +218,43 @@ export default function FederationDashboardPage() {
         </Link>
       </div>
 
-      {/* ── SYSTEMIC LOGS & COMPLIANCE SECTION ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div
-          className="lg:col-span-2 rounded-2xl p-6 border shadow-sm space-y-4"
-          style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-          }}
-        >
-          <div className="flex items-center justify-between">
-            <h3 className="font-extrabold text-base">Federation Operation Logs</h3>
-            <span className="text-[10px] font-mono font-bold text-[#0140A7] bg-[rgba(1,64,167,0.1)] px-2 py-1 rounded-md">
-              LIVE AUDIT STREAM
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            {recentLogs.map((log) => (
-              <div
-                key={log.id}
-                className="p-3.5 rounded-xl border flex items-start gap-3 text-xs"
-                style={{
-                  backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
-                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-                }}
-              >
-                <span
-                  className="rounded-md px-2 py-0.5 text-[9px] font-mono font-bold uppercase shrink-0"
-                  style={{ backgroundColor: log.badgeBg, color: log.badgeColor }}
-                >
-                  {log.type}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold leading-tight">{log.text}</p>
-                  <p className="text-[10px] font-mono mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
-                    {log.time}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* ── SYSTEMIC LOGS SECTION ── */}
+      <div
+        className="rounded-2xl p-6 shadow-sm space-y-4"
+        style={{
+          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+        }}
+      >
+        <div className="flex items-center justify-between">
+          <h3 className="font-extrabold text-base">Federation Operation Logs</h3>
+          <span className="text-[10px] font-mono font-bold text-[#0140A7] bg-[rgba(1,64,167,0.1)] px-2 py-1 rounded-md">
+            LIVE AUDIT STREAM
+          </span>
         </div>
 
-        {/* Regulatory Governance Card */}
-        <div
-          className="rounded-2xl p-6 border shadow-sm space-y-4 flex flex-col justify-between"
-          style={{
-            backgroundColor: theme === "dark" ? "#0A4870" : "#DCEBF6",
-            borderColor: "rgba(1, 64, 167, 0.3)",
-          }}
-        >
-          <div className="space-y-2">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0140A7]">
-              LEGAL MANDATE COMPLIANCE
-            </span>
-            <h3 className="font-extrabold text-lg text-[#0A4870] dark:text-white">
-              Proclamation No. 1284/2023
-            </h3>
-            <p className="text-xs leading-relaxed text-[#555B63] dark:text-[#C9D1D9]">
-              Every athlete entered into national championship heats must be authenticated against the Fayda National Biometric Identity API before competition bib generation.
-            </p>
-          </div>
-
-          <Link
-            href="/policy"
-            className="w-full py-3 px-4 rounded-xl text-xs font-bold text-center text-white shadow-md block transition-all"
-            style={{ backgroundColor: "#0140A7" }}
-          >
-            Review Policy Directives →
-          </Link>
+        <div className="space-y-3">
+          {recentLogs.map((log) => (
+            <div
+              key={log.id}
+              className="p-3.5 rounded-xl flex items-start gap-3 text-xs"
+              style={{
+                backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
+              }}
+            >
+              <span
+                className="rounded-md px-2 py-0.5 text-[9px] font-mono font-bold uppercase shrink-0"
+                style={{ backgroundColor: log.badgeBg, color: log.badgeColor }}
+              >
+                {log.type}
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold leading-tight">{log.text}</p>
+                <p className="text-[10px] font-mono mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+                  {log.time}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
