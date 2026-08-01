@@ -208,16 +208,19 @@ export default function PolicyPage() {
       </div>
 
       {/* Policies Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPolicies.map((policy) => (
-          <Card key={policy.id} className="hover:shadow-md transition-shadow">
-            <CardContent className="p-4 space-y-3">
+          <Card key={policy.id} className="hover-lift hover:shadow-md transition-all rounded-3xl border" style={{
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
+          }}>
+            <CardContent className="p-6 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold bg-[#F6F8FA] dark:bg-[#21262D] px-2 py-1 rounded">
+                <span className="text-[10px] font-mono font-extrabold bg-[#F0F2F5] dark:bg-slate-800 text-[var(--text-secondary)] px-2.5 py-1 rounded-lg">
                   {policy.id}
                 </span>
                 <span
-                  className="px-2 py-1 rounded-full text-xs font-medium text-white"
+                  className="px-2.5 py-1 rounded-full text-[9px] font-mono font-extrabold text-white"
                   style={{ backgroundColor: policy.statusColor }}
                 >
                   {policy.status}
@@ -225,28 +228,27 @@ export default function PolicyPage() {
               </div>
 
               <div>
-                <span className="text-xs font-medium text-[#0140A7] bg-[#DCEBF6] dark:bg-[rgba(1,64,167,0.2)] px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono font-extrabold text-[#0140A7] dark:text-[#3B82F6] bg-[rgba(1,64,167,0.08)] px-2.5 py-1 rounded-lg">
                   {policy.category}
                 </span>
-                <h3 className="font-semibold mt-2 leading-tight">{policy.title}</h3>
-                <p className="text-sm mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
+                <h3 className="font-extrabold text-base leading-tight mt-3 text-[var(--text-primary)]">{policy.title}</h3>
+                <p className="text-xs font-semibold mt-2 leading-relaxed" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
                   {policy.description}
                 </p>
               </div>
 
-              <div className="pt-2 border-t" style={{ borderColor: theme === "dark" ? "#30363D" : "#E5E7EB" }}>
-                <p className="text-xs" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
+              <div className="pt-3 border-t" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+                <p className="text-[10px] font-semibold" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
                   Last updated: {policy.lastUpdated}
                 </p>
               </div>
 
               <Button
-                variant="outline"
-                className="w-full text-[#0140A7] border-[#0140A7] hover:bg-[#DCEBF6]"
-                size="sm"
+                variant="default"
+                className="w-full mt-2 bg-gradient-to-r from-[#0140A7] to-[#0A4870] hover:shadow-md text-white font-extrabold rounded-2xl py-2.5 text-xs active:scale-[0.98] transition-all cursor-pointer border-0 shadow-xs hover:scale-[1.01]"
                 onClick={() => setSelectedPolicy(policy)}
               >
-                View Policy Details →
+                View Policy Details &rarr;
               </Button>
             </CardContent>
           </Card>
@@ -254,35 +256,38 @@ export default function PolicyPage() {
       </div>
 
       {/* Additional Resources */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Additional Resources</CardTitle>
-          <CardDescription>
+      <Card className="rounded-3xl border shadow-sm" style={{
+        backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+        borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
+      }}>
+        <CardHeader className="border-b pb-4" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+          <CardTitle className="text-base font-black text-[var(--text-primary)]">Additional Resources</CardTitle>
+          <CardDescription className="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">
             Important documents and guidelines for athletes, coaches, and club administrators.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-5">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button variant="outline" className="justify-start h-auto p-4">
+            <Button variant="outline" className="justify-start h-auto p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/40 text-[var(--text-primary)] transition-all active:scale-[0.98] border cursor-pointer" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)" }}>
               <div className="text-left">
-                <div className="font-semibold">Registration Guide</div>
-                <div className="text-sm text-muted-foreground mt-1">
+                <div className="font-extrabold text-xs">Registration Guide</div>
+                <div className="text-[10px] font-semibold text-[#64748B] dark:text-[#94A3B8] mt-1">
                   Step-by-step athlete registration process
                 </div>
               </div>
             </Button>
-            <Button variant="outline" className="justify-start h-auto p-4">
+            <Button variant="outline" className="justify-start h-auto p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/40 text-[var(--text-primary)] transition-all active:scale-[0.98] border cursor-pointer" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)" }}>
               <div className="text-left">
-                <div className="font-semibold">Competition Rules</div>
-                <div className="text-sm text-muted-foreground mt-1">
+                <div className="font-extrabold text-xs">Competition Rules</div>
+                <div className="text-[10px] font-semibold text-[#64748B] dark:text-[#94A3B8] mt-1">
                   Official competition regulations and standards
                 </div>
               </div>
             </Button>
-            <Button variant="outline" className="justify-start h-auto p-4">
+            <Button variant="outline" className="justify-start h-auto p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800/40 text-[var(--text-primary)] transition-all active:scale-[0.98] border cursor-pointer" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)" }}>
               <div className="text-left">
-                <div className="font-semibold">Coach Handbook</div>
-                <div className="text-sm text-muted-foreground mt-1">
+                <div className="font-extrabold text-xs">Coach Handbook</div>
+                <div className="text-[10px] font-semibold text-[#64748B] dark:text-[#94A3B8] mt-1">
                   Certification requirements and best practices
                 </div>
               </div>
@@ -293,67 +298,76 @@ export default function PolicyPage() {
 
       {/* Policy Detail Modal */}
       {selectedPolicy && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-md animate-fadeIn">
           <div
-            className="rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
+            className="rounded-3xl p-6 sm:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border transition-all animate-fadeIn"
             style={{
-              backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+              backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+              borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.6)" : "rgba(226, 232, 240, 0.8)",
             }}
           >
-            <div className="flex justify-between items-start mb-6">
+            <div className="flex justify-between items-start mb-6 border-b pb-4" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xs font-semibold bg-[#DCEBF6] dark:bg-[rgba(1,64,167,0.2)] px-3 py-1 rounded">
+                  <span className="text-[10px] font-mono font-extrabold bg-[#F0F2F5] dark:bg-slate-800 text-[var(--text-secondary)] px-2.5 py-1 rounded-lg">
                     {selectedPolicy.id}
                   </span>
                   <span
-                    className="px-3 py-1 rounded-full text-xs font-medium text-white"
+                    className="px-2.5 py-1 rounded-full text-[9px] font-mono font-extrabold text-white"
                     style={{ backgroundColor: selectedPolicy.statusColor }}
                   >
                     {selectedPolicy.status}
                   </span>
                 </div>
-                <h2 className="text-2xl font-extrabold tracking-tight">{selectedPolicy.title}</h2>
-                <p className="text-sm mt-2" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
-                  Category: {selectedPolicy.category} • Last updated: {selectedPolicy.lastUpdated}
+                <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[var(--text-primary)]">{selectedPolicy.title}</h2>
+                <p className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+                  {selectedPolicy.category} &bull; Updated: {selectedPolicy.lastUpdated}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedPolicy(null)}
-                className="text-2xl hover:opacity-70 transition-opacity p-2 rounded-xl hover:bg-[#F7F8FA] dark:hover:bg-[#21262D]"
-                style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}
+                className="text-xl hover:opacity-70 transition-opacity p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-[var(--text-primary)] cursor-pointer"
               >
-                ×
+                ✕
               </button>
             </div>
 
             <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-bold mb-3">Policy Overview</h3>
-                <p className="text-sm leading-relaxed" style={{ color: theme === "dark" ? "#C9D1D9" : "#1D1D1F" }}>
+              <div className="p-5 rounded-2xl border bg-slate-50 dark:bg-slate-900/40" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+                <h3 className="text-xs font-black tracking-wider uppercase text-[#0140A7] dark:text-[#3B82F6] mb-2">Policy Overview</h3>
+                <p className="text-xs leading-relaxed font-semibold text-[var(--text-primary)]">
                   {selectedPolicy.fullContent}
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg font-bold mb-3">Requirements & Standards</h3>
-                <ul className="space-y-2">
+                <h3 className="text-sm font-extrabold mb-3 text-[var(--text-primary)] flex items-center gap-2">
+                  <span className="h-5 w-5 rounded-lg bg-[#10B981] text-white flex items-center justify-center text-[10px] font-extrabold">&bull;</span>
+                  Compliance Requirements &amp; Standards
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                   {selectedPolicy.requirements.map((requirement, index) => (
-                    <li key={index} className="flex items-start gap-3 text-sm">
-                      <span className="h-2 w-2 rounded-full bg-[#0140A7] mt-2 flex-shrink-0"></span>
-                      <span>{requirement}</span>
-                    </li>
+                    <div
+                      key={index}
+                      className="p-4 rounded-2xl border flex items-start gap-3 bg-slate-50/50 dark:bg-slate-900/20"
+                      style={{
+                        borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)",
+                      }}
+                    >
+                      <span className="h-5 w-5 rounded-full bg-[#10B981] text-white flex items-center justify-center text-[10px] font-extrabold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="text-xs font-semibold text-[var(--text-primary)] leading-relaxed">{requirement}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
 
-              <div className="flex gap-3 pt-4 border-t" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
-                <Button
+              <div className="flex gap-3 pt-4 border-t" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+                <button
                   onClick={() => setSelectedPolicy(null)}
-                  className="flex-1 bg-[#0140A7] text-white hover:bg-[#0A4870] font-extrabold"
+                  className="flex-1 bg-gradient-to-r from-[#0140A7] to-[#0A4870] text-white py-3.5 rounded-2xl font-extrabold hover:shadow-lg transform active:scale-95 transition-all text-xs cursor-pointer shadow-sm"
                 >
                   Close Policy Details
-                </Button>
+                </button>
               </div>
             </div>
           </div>

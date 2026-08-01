@@ -35,77 +35,81 @@ export default function ClubRosterPage() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6 animate-fadeIn">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold">{club.name} - Roster</h1>
-          <p className="text-sm mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
-            {club.region} • Head Coach: {club.headCoach}
+          <span className="text-[10px] font-mono font-extrabold text-[#0140A7] dark:text-[#3B82F6] bg-[rgba(1,64,167,0.08)] px-2.5 py-1 rounded-lg uppercase tracking-wider">
+            Club Profile
+          </span>
+          <h1 className="text-2xl font-black tracking-tight mt-1.5 text-[var(--text-primary)]">{club.name} - Roster</h1>
+          <p className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+            {club.region} &bull; Head Coach: <span className="text-[var(--text-primary)]">{club.headCoach}</span>
           </p>
         </div>
         <button
           onClick={() => router.back()}
-          className="px-4 py-2 border rounded text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+          className="px-4 py-2.5 border rounded-2xl text-xs font-extrabold transition-all hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer active:scale-95 self-start sm:self-center"
           style={{
-            borderColor: theme === "dark" ? "#30363D" : "#D0D7DE",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.5)" : "rgba(226, 232, 240, 0.8)",
+            color: theme === "dark" ? "#F8FAFC" : "#0F172A",
           }}
         >
-          ← Back to Clubs
+          &larr; Back to Clubs
         </button>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
         <div
-          className="p-4 rounded border"
+          className="p-5 rounded-3xl border shadow-sm"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D0D7DE",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
-          <div className="text-2xl font-bold">{athletes.length}</div>
-          <div className="text-sm" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
+          <div className="text-2xl font-black tracking-tight">{athletes.length}</div>
+          <div className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
             Total Athletes
           </div>
         </div>
         <div
-          className="p-4 rounded border"
+          className="p-5 rounded-3xl border shadow-sm"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D0D7DE",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
-          <div className="text-2xl font-bold text-green-600">
+          <div className="text-2xl font-black text-emerald-500 tracking-tight">
             {athletes.filter(a => a.status === "Active").length}
           </div>
-          <div className="text-sm" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
-            Active Athletes
+          <div className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+            Active Competitors
           </div>
         </div>
         <div
-          className="p-4 rounded border"
+          className="p-5 rounded-3xl border shadow-sm"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D0D7DE",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
-          <div className="text-2xl font-bold text-orange-600">
+          <div className="text-2xl font-black text-amber-500 tracking-tight">
             {athletes.filter(a => a.status === "Retired").length}
           </div>
-          <div className="text-sm" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
-            Retired Athletes
+          <div className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+            Retired Alumni
           </div>
         </div>
         <div
-          className="p-4 rounded border"
+          className="p-5 rounded-3xl border shadow-sm"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D0D7DE",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
-          <div className="text-2xl font-bold text-[#0140A7]">100%</div>
-          <div className="text-sm" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
+          <div className="text-2xl font-black text-[#0140A7] dark:text-[#3B82F6] tracking-tight">100%</div>
+          <div className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
             Verification Rate
           </div>
         </div>
@@ -113,30 +117,31 @@ export default function ClubRosterPage() {
 
       {/* Athletes List */}
       <div
-        className="rounded border overflow-hidden"
+        className="rounded-3xl border overflow-hidden shadow-sm"
         style={{
-          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#30363D" : "#D0D7DE",
+          backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
         }}
       >
-        <div className="px-4 py-3 border-b" style={{ borderColor: theme === "dark" ? "#30363D" : "#D0D7DE" }}>
-          <h3 className="font-semibold">Registered Athletes</h3>
+        <div className="px-6 py-4 border-b flex items-center justify-between" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+          <h3 className="font-extrabold text-sm text-[var(--text-primary)]">Club Athlete Registry</h3>
+          <span className="text-[9px] font-mono font-extrabold text-[#10B981] bg-emerald-500/10 px-2 py-0.5 rounded">ROSTER CERTIFIED</span>
         </div>
-        <div className="divide-y" style={{ borderColor: theme === "dark" ? "#30363D" : "#D0D7DE" }}>
+        <div className="divide-y" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
           {athletes.map((athlete) => (
-            <div key={athlete.id} className="px-4 py-3 flex items-center justify-between">
+            <div key={athlete.id} className="px-6 py-4 flex items-center justify-between transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/20">
               <div>
-                <div className="font-medium">{athlete.name}</div>
-                <div className="text-sm" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
-                  {athlete.discipline} • {athlete.faydaId}
+                <div className="font-extrabold text-sm text-[var(--text-primary)]">{athlete.name}</div>
+                <div className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+                  {athlete.discipline} &bull; <span className="font-mono">{athlete.faydaId}</span>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <span
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${athlete.status === "Active"
-                    ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                    : "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400"
-                    }`}
+                  className={`px-3 py-1 rounded-full text-[10px] font-mono font-extrabold text-white`}
+                  style={{
+                    backgroundColor: athlete.status === "Active" ? "#10B981" : "#F59E0B",
+                  }}
                 >
                   {athlete.status}
                 </span>

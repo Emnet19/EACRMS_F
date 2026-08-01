@@ -12,28 +12,32 @@
   --brand-secondary-dark: #C98F00;
   --brand-secondary-light: #FFF3CC;
 
-  --bg-default: #F7F8FA;
+  --bg-default: #F8FAFC;
   --bg-surface: #FFFFFF;
-  --bg-surface-variant: #F1F3F5;
+  --bg-surface-variant: #F1F5F9;
 
-  --text-primary: #1D1D1F;
-  --text-secondary: #555B63;
-  --text-tertiary: #8B9098;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #64748B;
   --text-on-primary: #FFFFFF;
   --text-on-secondary: #FFFFFF;
 
-  --border-default: #D9DEE5;
+  --border-default: #E2E8F0;
 
-  --status-success: #2E7D32;
+  --status-success: #10B981;
   --status-warning: #F59E0B;
-  --status-error: #D32F2F;
-  --status-info: #0288D1;
+  --status-error: #EF4444;
+  --status-info: #3B82F6;
 
   --background: var(--bg-default);
   --foreground: var(--text-primary);
   --card: var(--bg-surface);
   --card-foreground: var(--text-primary);
   --border-color: var(--border-default);
+
+  /* Glassmorphism Variables - Light */
+  --theme-glass-bg: rgba(255, 255, 255, 0.75);
+  --theme-glass-border: rgba(148, 163, 184, 0.2);
 
   /* Shadcn Variables */
   --primary: var(--brand-primary);
@@ -53,17 +57,17 @@
 
 .dark {
   /* Brand Tokens - Dark */
-  --bg-default: #0F1419;
-  --bg-surface: #1A1F26;
-  --bg-surface-variant: #252B34;
+  --bg-default: #0B0F19;
+  --bg-surface: #131B2E;
+  --bg-surface-variant: #1E293B;
 
-  --text-primary: #EAEEF2;
-  --text-secondary: #C5CCDA;
-  --text-tertiary: #8B95A6;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
 
-  --border-default: #3A4351;
+  --border-default: #334155;
 
-  --brand-primary-light: #0A4870;
+  --brand-primary-light: #1E293B;
   --brand-secondary-light: #3D2E00;
 
   --background: var(--bg-default);
@@ -71,6 +75,10 @@
   --card: var(--bg-surface);
   --card-foreground: var(--text-primary);
   --border-color: var(--border-default);
+
+  /* Glassmorphism Variables - Dark */
+  --theme-glass-bg: rgba(19, 27, 46, 0.8);
+  --theme-glass-border: rgba(51, 65, 85, 0.5);
 
   /* Shadcn Variables - Dark */
   --primary: var(--brand-primary);
@@ -181,4 +189,85 @@ h6 {
 .text-3xl {
   font-size: 32px;
   line-height: 1.25;
+}
+
+/* Modern Layout Utilities */
+@utility glass-panel {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--theme-glass-border);
+}
+
+@utility hover-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@utility hover-lift-sm {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@utility gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility pulse-glow {
+  animation: pulse-glow-anim 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow-anim {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(1, 64, 167, 0.15), 0 0 10px rgba(1, 64, 167, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(1, 64, 167, 0.4), 0 0 25px rgba(1, 64, 167, 0.2);
+  }
+}
+
+@utility pulse-green-glow {
+  animation: pulse-green-glow-anim 2s infinite ease-in-out;
+}
+
+@keyframes pulse-green-glow-anim {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5), 0 0 25px rgba(16, 185, 129, 0.2);
+  }
+}
+
+@utility pulse-amber-glow {
+  animation: pulse-amber-glow-anim 2s infinite ease-in-out;
+}
+
+@keyframes pulse-amber-glow-anim {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(245, 158, 11, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.5), 0 0 25px rgba(245, 158, 11, 0.2);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

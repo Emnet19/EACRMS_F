@@ -185,43 +185,43 @@ export default function ResultsPage() {
   const results = EVENT_RESULTS[selectedEvent] || EVENT_RESULTS["5000m Men Final"];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fadeIn">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-mono font-bold text-[#0140A7] uppercase tracking-wider block">
+          <span className="text-[10px] font-mono font-extrabold text-[#0140A7] tracking-widest uppercase block mb-1">
             FINISHLYNX LIVE DATA FEED
           </span>
-          <h1 className="text-2xl font-extrabold tracking-tight">
+          <h1 className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
             Official Championship Results Portal
           </h1>
-          <p className="text-xs mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
+          <p className="text-xs font-semibold mt-0.5" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
             Certified photo-finish timings, wind gauge records, and World Athletics qualification marks.
           </p>
         </div>
 
-        <button className="rounded-xl px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition-all active:scale-95 flex items-center gap-2 bg-[#0140A7] hover:bg-[#0A4870]">
+        <button className="bg-gradient-to-r from-[#0140A7] to-[#0A4870] hover:shadow-lg text-white font-extrabold rounded-2xl px-5 py-3 text-xs active:scale-[0.98] transition-all cursor-pointer hover:scale-[1.01] flex items-center gap-2">
           Export Results Bulletin (PDF / CSV)
         </button>
       </div>
 
       {/* Selector & Feed Info */}
       <div
-        className="p-4 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        className="p-5 rounded-3xl border shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4"
         style={{
-          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+          backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
         }}
       >
         <div className="flex items-center gap-3">
-          <label className="text-xs font-bold shrink-0">Select Event:</label>
+          <label className="text-xs font-bold shrink-0 text-[#64748B] dark:text-[#94A3B8]">Select Event:</label>
           <select
             value={selectedEvent}
             onChange={(e) => setSelectedEvent(e.target.value)}
-            className="rounded-xl px-3 py-1.5 text-xs font-bold border focus:outline-none focus:ring-2 focus:ring-[#0140A7]"
+            className="rounded-2xl px-4 py-2 text-xs font-bold border focus:outline-none focus:ring-2 focus:ring-[#0140A7] shadow-xs cursor-pointer"
             style={{
-              backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
-              borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+              backgroundColor: theme === "dark" ? "#1E293B" : "#F8FAFC",
+              borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.5)" : "rgba(226, 232, 240, 0.8)",
               color: "inherit",
             }}
           >
@@ -231,24 +231,24 @@ export default function ResultsPage() {
           </select>
         </div>
 
-        <div className="flex items-center gap-4 text-xs font-mono font-bold">
-          <span className="text-[#2E7D32]">WIND: +0.8 m/s (VALID)</span>
-          <span className="text-[#0140A7]">TEMP: 22°C</span>
-          <span className="text-[#E6A500]">CAMERA: OPTIOJ-902 SYNCED</span>
+        <div className="flex flex-wrap items-center gap-4 text-[10px] font-mono font-extrabold">
+          <span className="text-[#10B981] bg-emerald-500/10 px-2.5 py-1 rounded-lg">WIND: +0.8 M/S (VALID)</span>
+          <span className="text-[#0140A7] dark:text-[#3B82F6] bg-blue-500/10 px-2.5 py-1 rounded-lg">TEMP: 22°C</span>
+          <span className="text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-lg">CAMERA: OPTIOJ-902 SYNCED</span>
         </div>
       </div>
 
       {/* Results Table */}
       <div
-        className="rounded-2xl border overflow-hidden shadow-sm"
+        className="rounded-3xl border overflow-hidden shadow-sm"
         style={{
-          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+          backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
         }}
       >
-        <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
-          <h3 className="font-extrabold text-sm">{selectedEvent} Standings</h3>
-          <span className="text-[10px] font-mono font-bold text-[#2E7D32]">
+        <div className="p-5 border-b flex items-center justify-between" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+          <h3 className="font-extrabold text-sm text-[var(--text-primary)]">{selectedEvent} Standings</h3>
+          <span className="text-[9px] font-mono font-extrabold text-[#10B981] bg-emerald-500/10 px-2.5 py-1 rounded-lg">
             OFFICIAL FINISH LYNX VERIFIED
           </span>
         </div>
@@ -258,35 +258,43 @@ export default function ResultsPage() {
             <thead
               className="border-b uppercase font-mono text-[10px]"
               style={{
-                backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
-                borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-                color: theme === "dark" ? "#8B949E" : "#8B9098",
+                backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.3)" : "#F8FAFC",
+                borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)",
+                color: theme === "dark" ? "#94A3B8" : "#64748B",
               }}
             >
               <tr>
-                <th className="p-4">Rank</th>
-                <th className="p-4">BIB &amp; Athlete</th>
-                <th className="p-4">Club / Region</th>
-                <th className="p-4">Mark / Time</th>
-                <th className="p-4">Reaction</th>
-                <th className="p-4">Status / Notes</th>
+                <th className="p-4 font-bold">Rank</th>
+                <th className="p-4 font-bold">BIB &amp; Athlete</th>
+                <th className="p-4 font-bold">Club / Region</th>
+                <th className="p-4 font-bold">Mark / Time</th>
+                <th className="p-4 font-bold">Reaction</th>
+                <th className="p-4 font-bold">Status / Notes</th>
               </tr>
             </thead>
-            <tbody className="divide-y" style={{ borderColor: theme === "dark" ? "#30363D" : "#F1F3F5" }}>
+            <tbody className="divide-y" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
               {results.map((res) => (
-                <tr key={res.rank} className="hover:bg-[var(--bg-surface-variant)] transition-colors">
+                <tr key={res.rank} className="hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors">
                   <td className="p-4 font-mono font-extrabold text-sm">
-                    {res.rank === 1 ? "1" : res.rank === 2 ? "2" : res.rank === 3 ? "3" : res.rank}
+                    {res.rank === 1 ? (
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-400 text-amber-950 font-black text-xs shadow-xs">1</span>
+                    ) : res.rank === 2 ? (
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-300 text-slate-800 font-black text-xs shadow-xs">2</span>
+                    ) : res.rank === 3 ? (
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#CD7F32] text-white font-black text-xs shadow-xs">3</span>
+                    ) : (
+                      <span className="pl-2">{res.rank}</span>
+                    )}
                   </td>
                   <td className="p-4">
-                    <p className="font-extrabold">{res.athleteName}</p>
-                    <p className="text-[10px] font-mono text-[#0140A7]">{res.bib}</p>
+                    <p className="font-extrabold text-[var(--text-primary)]">{res.athleteName}</p>
+                    <p className="text-[10px] font-mono font-semibold text-[#0140A7] dark:text-[#3B82F6] mt-0.5">{res.bib}</p>
                   </td>
-                  <td className="p-4 font-medium">{res.club}</td>
-                  <td className="p-4 font-mono font-extrabold text-sm text-[#0140A7]">
+                  <td className="p-4 font-bold text-[var(--text-primary)]">{res.club}</td>
+                  <td className="p-4 font-mono font-black text-sm text-[#0140A7] dark:text-[#3B82F6]">
                     {res.timeMark}
                   </td>
-                  <td className="p-4 font-mono">{res.reactionTime}</td>
+                  <td className="p-4 font-mono font-semibold text-[#64748B] dark:text-[#94A3B8]">{res.reactionTime}</td>
                   <td className="p-4">
                     <div className="flex items-center gap-2">
                       <span
@@ -298,14 +306,14 @@ export default function ResultsPage() {
                               : res.status === "Silver"
                                 ? "#8B9098"
                                 : res.status === "Bronze"
-                                  ? "#C98F00"
-                                  : "#2E7D32",
+                                  ? "#CD7F32"
+                                  : "#10B981",
                         }}
                       >
                         {res.status}
                       </span>
                       {res.recordNote && (
-                        <span className="text-[10px] font-bold text-[#D32F2F] font-mono">
+                        <span className="text-[9px] font-mono font-extrabold text-rose-500 bg-rose-500/10 px-2 py-0.5 rounded">
                           {res.recordNote}
                         </span>
                       )}

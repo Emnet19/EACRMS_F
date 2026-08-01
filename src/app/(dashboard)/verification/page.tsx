@@ -109,17 +109,17 @@ export default function VerificationPage() {
   const verifiedCount = applications.filter((a) => a.status === "Verified").length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fadeIn">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-mono font-bold text-[#0140A7] uppercase tracking-wider block">
+          <span className="text-[10px] font-mono font-extrabold text-[#0140A7] tracking-widest uppercase block mb-1">
             BIOMETRIC CONTROL PANEL
           </span>
-          <h1 className="text-2xl font-extrabold tracking-tight">
+          <h1 className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
             Fayda FAN Verification Audit Queue
           </h1>
-          <p className="text-xs mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
+          <p className="text-xs font-semibold mt-0.5" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
             Audit National ID biometrics, age limits, and issue official EAF athlete competition licenses.
           </p>
         </div>
@@ -131,59 +131,58 @@ export default function VerificationPage() {
               prev.map((a) => (a.status === "Pending" ? { ...a, status: "Verified" } : a))
             );
           }}
-          className="rounded-xl px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition-all active:scale-95"
-          style={{ backgroundColor: "#2E7D32" }}
+          className="bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-lg text-white font-extrabold rounded-2xl px-5 py-3 text-xs active:scale-[0.98] transition-all cursor-pointer hover:scale-[1.01]"
         >
           ✓ Batch Approve All Pending ({pendingCount})
         </button>
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-5">
         <div
-          className="rounded-2xl p-4 border text-center"
+          className="rounded-3xl p-5 border text-center shadow-xs hover-lift transition-all"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
-          <p className="text-2xl font-extrabold text-[#2E7D32]">{verifiedCount}</p>
-          <p className="text-xs font-semibold" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+          <p className="text-2xl font-black text-[#10B981] tracking-tight">{verifiedCount}</p>
+          <p className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
             Verified Athletes
           </p>
         </div>
         <div
-          className="rounded-2xl p-4 border text-center"
+          className="rounded-3xl p-5 border text-center shadow-xs hover-lift transition-all"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
-          <p className="text-2xl font-extrabold text-[#F59E0B]">{pendingCount}</p>
-          <p className="text-xs font-semibold" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+          <p className="text-2xl font-black text-amber-500 tracking-tight">{pendingCount}</p>
+          <p className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
             Pending Review
           </p>
         </div>
         <div
-          className="rounded-2xl p-4 border text-center"
+          className="rounded-3xl p-5 border text-center shadow-xs hover-lift transition-all"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
-          <p className="text-2xl font-extrabold text-[#D32F2F]">{flaggedCount}</p>
-          <p className="text-xs font-semibold" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+          <p className="text-2xl font-black text-rose-500 tracking-tight">{flaggedCount}</p>
+          <p className="text-xs font-semibold mt-1" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
             Age / Biometric Flags
           </p>
         </div>
       </div>
 
       {/* Controls & Search */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b pb-4" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
         {/* Filter buttons */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl border" style={{
-          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+        <div className="flex items-center gap-1.5 p-1 rounded-2xl border" style={{
+          backgroundColor: theme === "dark" ? "#1E293B" : "#FFFFFF",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.5)" : "rgba(226, 232, 240, 0.8)",
         }}>
           {(["All", "Pending", "Flagged", "Verified"] as const).map((tab) => {
             const isActive = filter === tab;
@@ -191,7 +190,7 @@ export default function VerificationPage() {
               <button
                 key={tab}
                 onClick={() => setFilter(tab)}
-                className="rounded-lg px-3 py-1.5 text-xs font-bold transition-colors"
+                className="rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer"
                 style={{
                   backgroundColor: isActive
                     ? "#0140A7"
@@ -211,10 +210,10 @@ export default function VerificationPage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search by athlete name, club, or FAN ID..."
-          className="w-full sm:w-72 rounded-xl px-4 py-2 text-xs border focus:outline-none"
+          className="w-full sm:w-72 rounded-2xl px-4 py-2.5 text-xs border focus:outline-none focus:ring-2 focus:ring-[#0140A7] shadow-sm"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
             color: "inherit",
           }}
         />
@@ -224,10 +223,10 @@ export default function VerificationPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Table Column */}
         <div
-          className="lg:col-span-2 rounded-2xl border overflow-hidden shadow-sm"
+          className="lg:col-span-2 rounded-3xl border overflow-hidden shadow-sm"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
           <div className="overflow-x-auto">
@@ -235,40 +234,40 @@ export default function VerificationPage() {
               <thead
                 className="border-b uppercase font-mono text-[10px]"
                 style={{
-                  backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
-                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-                  color: theme === "dark" ? "#8B949E" : "#8B9098",
+                  backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.3)" : "#F8FAFC",
+                  borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)",
+                  color: theme === "dark" ? "#94A3B8" : "#64748B",
                 }}
               >
                 <tr>
-                  <th className="p-4">Athlete &amp; Club</th>
-                  <th className="p-4">Fayda FAN ID</th>
-                  <th className="p-4">Biometric Match</th>
-                  <th className="p-4">Status</th>
-                  <th className="p-4 text-right">Action</th>
+                  <th className="p-4 font-bold">Athlete &amp; Club</th>
+                  <th className="p-4 font-bold">Fayda FAN ID</th>
+                  <th className="p-4 font-bold">Biometric Match</th>
+                  <th className="p-4 font-bold">Status</th>
+                  <th className="p-4 text-right font-bold">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y" style={{ borderColor: theme === "dark" ? "#30363D" : "#F1F3F5" }}>
+              <tbody className="divide-y" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
                 {filteredApps.map((app) => (
                   <tr
                     key={app.id}
                     onClick={() => setSelectedApp(app)}
-                    className="cursor-pointer transition-colors hover:bg-[var(--bg-surface-variant)]"
+                    className="cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/10"
                     style={{
                       backgroundColor: selectedApp?.id === app.id
-                        ? theme === "dark" ? "#21262D" : "#DCEBF6"
+                        ? theme === "dark" ? "rgba(1, 64, 167, 0.15)" : "#DCEBF6"
                         : "transparent",
                     }}
                   >
                     <td className="p-4">
-                      <p className="font-extrabold">{app.name}</p>
-                      <p className="text-[10px]" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
-                        {app.club} • {app.eventCategory}
+                      <p className="font-extrabold text-[var(--text-primary)]">{app.name}</p>
+                      <p className="text-[10px] font-semibold mt-0.5" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+                        {app.club} &bull; {app.eventCategory}
                       </p>
                     </td>
-                    <td className="p-4 font-mono text-[11px]">{app.fanId}</td>
+                    <td className="p-4 font-mono font-semibold text-[#64748B] dark:text-[#94A3B8]">{app.fanId}</td>
                     <td className="p-4">
-                      <span className="font-mono font-bold text-[#0140A7]">
+                      <span className="font-mono font-black text-[#0140A7] dark:text-[#3B82F6]">
                         {app.biometricScore}%
                       </span>
                     </td>
@@ -278,9 +277,9 @@ export default function VerificationPage() {
                         style={{
                           backgroundColor:
                             app.status === "Verified"
-                              ? "#2E7D32"
+                              ? "#10B981"
                               : app.status === "Flagged"
-                                ? "#D32F2F"
+                                ? "#EF4444"
                                 : "#F59E0B",
                         }}
                       >
@@ -293,9 +292,9 @@ export default function VerificationPage() {
                           e.stopPropagation();
                           setSelectedApp(app);
                         }}
-                        className="text-xs font-bold text-[#0140A7] hover:underline"
+                        className="px-2.5 py-1 text-[11px] font-extrabold bg-[#0140A7]/10 dark:bg-[#3B82F6]/10 text-[#0140A7] dark:text-[#3B82F6] rounded-xl transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-xs border border-transparent"
                       >
-                        Audit →
+                        Audit
                       </button>
                     </td>
                   </tr>
@@ -307,74 +306,72 @@ export default function VerificationPage() {
 
         {/* Selected Detail Inspector */}
         <div
-          className="rounded-2xl p-6 border shadow-sm space-y-5 flex flex-col justify-between"
+          className="rounded-3xl p-6 border shadow-sm space-y-5 flex flex-col justify-between"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
           {selectedApp ? (
             <div className="space-y-5">
-              <div className="border-b pb-3" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
-                <span className="text-[10px] font-mono font-bold text-[#0140A7]">
+              <div className="border-b pb-4" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+                <span className="text-[9px] font-mono font-extrabold text-[#0140A7] dark:text-[#3B82F6] bg-blue-500/10 px-2.5 py-1 rounded-lg uppercase">
                   APPLICATION AUDIT DOSSIER
                 </span>
-                <h3 className="text-lg font-extrabold mt-1">{selectedApp.name}</h3>
-                <p className="text-xs" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+                <h3 className="text-lg font-black tracking-tight mt-2.5 text-[var(--text-primary)]">{selectedApp.name}</h3>
+                <p className="text-xs font-semibold" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
                   {selectedApp.club}
                 </p>
               </div>
 
               <div className="space-y-3 text-xs">
-                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "#21262D" : "#F1F3F5" }}>
-                  <span style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>FAN Token:</span>
-                  <span className="font-mono font-bold">{selectedApp.fanId}</span>
+                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.2)" : "#F1F5F9" }}>
+                  <span className="font-semibold text-[#64748B] dark:text-[#94A3B8]">FAN Token:</span>
+                  <span className="font-mono font-bold text-[var(--text-primary)]">{selectedApp.fanId}</span>
                 </div>
-                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "#21262D" : "#F1F3F5" }}>
-                  <span style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>Registered Age:</span>
-                  <span className="font-bold">{selectedApp.age} years old</span>
+                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.2)" : "#F1F5F9" }}>
+                  <span className="font-semibold text-[#64748B] dark:text-[#94A3B8]">Registered Age:</span>
+                  <span className="font-bold text-[var(--text-primary)]">{selectedApp.age} years old</span>
                 </div>
-                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "#21262D" : "#F1F3F5" }}>
-                  <span style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>Biometric Score:</span>
-                  <span className="font-mono font-extrabold text-[#2E7D32]">
+                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.2)" : "#F1F5F9" }}>
+                  <span className="font-semibold text-[#64748B] dark:text-[#94A3B8]">Biometric Score:</span>
+                  <span className="font-mono font-black text-[#10B981]">
                     {selectedApp.biometricScore}% MATCH
                   </span>
                 </div>
-                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "#21262D" : "#F1F3F5" }}>
-                  <span style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>Event Category:</span>
-                  <span className="font-bold">{selectedApp.eventCategory}</span>
+                <div className="flex justify-between py-1 border-b" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.2)" : "#F1F5F9" }}>
+                  <span className="font-semibold text-[#64748B] dark:text-[#94A3B8]">Event Category:</span>
+                  <span className="font-bold text-[var(--text-primary)]">{selectedApp.eventCategory}</span>
                 </div>
 
                 {selectedApp.flagReason && (
-                  <div className="p-3 rounded-xl bg-[rgba(211,47,47,0.1)] border border-[rgba(211,47,47,0.3)] text-[#D32F2F] text-xs font-semibold space-y-1">
-                    <p className="font-bold text-[#D32F2F]">FLAG REASON:</p>
-                    <p>{selectedApp.flagReason}</p>
+                  <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-[#EF4444] text-xs font-semibold space-y-1">
+                    <p className="font-black text-[#EF4444] text-[10px] tracking-wider uppercase">FLAG REASON:</p>
+                    <p className="leading-relaxed">{selectedApp.flagReason}</p>
                   </div>
                 )}
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-2 pt-2">
+              <div className="space-y-3.5 pt-4">
                 <button
                   onClick={() => handleUpdateStatus(selectedApp.id, "Verified")}
-                  className="w-full py-2.5 rounded-xl text-xs font-extrabold text-white shadow-md"
-                  style={{ backgroundColor: "#2E7D32" }}
+                  className="w-full py-3 rounded-2xl text-xs font-extrabold text-white shadow-md bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-lg transform active:scale-95 transition-all cursor-pointer"
                 >
                   ✓ Approve &amp; Issue EAF License
                 </button>
                 <button
                   onClick={() => handleUpdateStatus(selectedApp.id, "Flagged")}
-                  className="w-full py-2.5 rounded-xl text-xs font-extrabold text-white shadow-md"
-                  style={{ backgroundColor: "#D32F2F" }}
+                  className="w-full py-3 rounded-2xl text-xs font-extrabold text-white shadow-md bg-gradient-to-r from-[#EF4444] to-[#DC2626] hover:shadow-lg transform active:scale-95 transition-all cursor-pointer"
                 >
                   🚩 Flag for Biometric Hearing
                 </button>
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center text-center h-64 space-y-2" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
-              <span className="text-3xl">👈</span>
-              <p className="text-xs font-semibold">Select an athlete application from the list to audit dossier details.</p>
+            <div className="flex flex-col items-center justify-center text-center h-64 space-y-3" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+              <span className="text-3xl animate-bounce">👈</span>
+              <p className="text-xs font-bold leading-relaxed max-w-[200px]">Select an athlete application from the list to audit dossier details.</p>
             </div>
           )}
         </div>

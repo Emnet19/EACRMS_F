@@ -76,32 +76,31 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
   const sidebarContent = (
     <div className="flex flex-col h-full justify-between">
       <div>
-        {/* Clean User Profile Info */}
+        {/* Clean User Profile Info with Glassmorphism */}
         <div
-          className="p-4 mx-3 my-4 rounded-xl border"
+          className="p-4 mx-3 my-4 rounded-2xl border shadow-sm transition-all hover:shadow-md"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#F7F8FA",
-            borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+            backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.4)" : "rgba(241, 245, 249, 0.6)",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.5)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
           <div className="flex items-center gap-3">
             <div
-              className="h-9 w-9 rounded-full flex items-center justify-center font-semibold text-white text-xs shrink-0"
-              style={{ backgroundColor: "#0140A7" }}
+              className="h-10 w-10 rounded-xl flex items-center justify-center font-extrabold text-white text-xs shrink-0 shadow-md bg-gradient-to-br from-[#0140A7] to-[#0288D1]"
             >
               {user?.name.split(" ").map((n) => n[0]).join("") || "EAF"}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="font-semibold text-xs truncate">{user?.name}</p>
-              <p className="text-[11px] truncate text-[#555B63] dark:text-[#8B949E]">
+              <p className="font-extrabold text-xs text-[var(--text-primary)] truncate">{user?.name}</p>
+              <p className="text-[10px] font-semibold truncate text-[#64748B] dark:text-[#94A3B8] mt-0.5">
                 {user?.role}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Navigation Links without sticker badges */}
-        <nav className="space-y-1 px-3">
+        {/* Navigation Links */}
+        <nav className="space-y-1.5 px-3">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -109,20 +108,24 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
                 key={item.href}
                 href={item.href}
                 onClick={onCloseMobile}
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium transition-all"
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-bold transition-all hover:translate-x-1 duration-200"
                 style={
                   isActive
                     ? {
-                      backgroundColor: theme === "dark" ? "#0A4870" : "#DCEBF6",
-                      color: "#0140A7",
-                      fontWeight: 600,
+                      background: theme === "dark" 
+                        ? "linear-gradient(135deg, #0140A7 0%, #0A4870 100%)" 
+                        : "linear-gradient(135deg, #DCEBF6 0%, #B9D7F2 100%)",
+                      color: theme === "dark" ? "#FFFFFF" : "#0140A7",
+                      boxShadow: theme === "dark" 
+                        ? "0 4px 12px rgba(1, 64, 167, 0.3)" 
+                        : "0 4px 12px rgba(1, 64, 167, 0.08)",
                     }
                     : {
-                      color: theme === "dark" ? "#C9D1D9" : "#555B63",
+                      color: theme === "dark" ? "#94A3B8" : "#475569",
                     }
                 }
               >
-                <span style={{ color: isActive ? "#0140A7" : "inherit" }}>
+                <span style={{ color: isActive ? (theme === "dark" ? "#FFFFFF" : "#0140A7") : "inherit" }}>
                   {item.icon}
                 </span>
                 <span>{item.name}</span>
@@ -134,17 +137,17 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
 
       {/* Clean Footer Info */}
       <div
-        className="p-3 m-3 rounded-lg border text-[11px]"
+        className="p-4 m-3 rounded-2xl border text-[10px] transition-all hover:bg-slate-50 dark:hover:bg-slate-900/30"
         style={{
-          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-          color: theme === "dark" ? "#8B949E" : "#555B63",
+          backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.2)" : "rgba(248, 250, 252, 0.5)",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.6)",
+          color: theme === "dark" ? "#94A3B8" : "#64748B",
         }}
       >
-        <p className="font-semibold text-xs" style={{ color: theme === "dark" ? "#F0F2F5" : "#1D1D1F" }}>
+        <p className="font-extrabold text-xs" style={{ color: theme === "dark" ? "#F8FAFC" : "#0F172A" }}>
           EACRMS Federation Portal
         </p>
-        <p className="text-[10px]">Official EAF Administration System</p>
+        <p className="text-[9px] font-semibold mt-0.5 opacity-80">Official EAF Administration System</p>
       </div>
     </div>
   );
@@ -153,10 +156,10 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
     <>
       {/* Desktop Sidebar */}
       <aside
-        className="hidden md:flex md:w-60 md:flex-col shrink-0 border-r min-h-[calc(100vh-4rem)] transition-colors"
+        className="hidden md:flex md:w-60 md:flex-col shrink-0 border-r min-h-[calc(100vh-4rem)] transition-all"
         style={{
-          backgroundColor: theme === "dark" ? "#0D1117" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+          backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
         }}
       >
         {sidebarContent}
@@ -170,14 +173,14 @@ export function Sidebar({ mobileOpen, onCloseMobile }: SidebarProps) {
             onClick={onCloseMobile}
           />
           <aside
-            className="relative z-50 w-64 max-w-full flex-col flex h-full shadow-xl transition-colors"
+            className="relative z-50 w-64 max-w-full flex-col flex h-full shadow-2xl transition-all"
             style={{
-              backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+              backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
             }}
           >
-            <div className="p-4 flex items-center justify-between border-b" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
-              <span className="font-semibold text-xs">Federation Navigation</span>
-              <button onClick={onCloseMobile} className="p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 text-xs">
+            <div className="p-4 flex items-center justify-between border-b" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)" }}>
+              <span className="font-bold text-xs">Federation Navigation</span>
+              <button onClick={onCloseMobile} className="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-xs">
                 ✕
               </button>
             </div>

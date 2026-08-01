@@ -223,15 +223,18 @@ export default function EventsPage() {
 
       {/* Events Table */}
       <div
-        className="rounded-2xl border overflow-hidden shadow-sm"
+        className="rounded-3xl border overflow-hidden shadow-sm animate-fadeIn"
         style={{
-          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+          backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
         }}
       >
-        <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
-          <h3 className="font-extrabold text-sm">Championship Event Schedule</h3>
-          <span className="text-[10px] font-mono font-bold text-[#0140A7]">
+        <div className="p-5 border-b flex items-center justify-between" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+          <div>
+            <h3 className="font-extrabold text-sm text-[var(--text-primary)]">Championship Event Schedule</h3>
+            <p className="text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] mt-0.5">Manage live events, camera linkages, and run assignments</p>
+          </div>
+          <span className="text-[9px] font-mono font-extrabold text-[#0140A7] bg-[rgba(1,64,167,0.08)] px-2.5 py-1 rounded-lg">
             WORLD ATHLETICS RULE 163 CERTIFIED
           </span>
         </div>
@@ -241,44 +244,44 @@ export default function EventsPage() {
             <thead
               className="border-b uppercase font-mono text-[10px]"
               style={{
-                backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
-                borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-                color: theme === "dark" ? "#8B949E" : "#8B9098",
+                backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.3)" : "#F8FAFC",
+                borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)",
+                color: theme === "dark" ? "#94A3B8" : "#64748B",
               }}
             >
               <tr>
-                <th className="p-4">Event Code &amp; Title</th>
-                <th className="p-4">Venue &amp; Time</th>
-                <th className="p-4">Entries</th>
-                <th className="p-4">Timing Feed</th>
-                <th className="p-4">Status</th>
-                <th className="p-4 text-right">Seeding</th>
+                <th className="p-4 font-bold">Event Code &amp; Title</th>
+                <th className="p-4 font-bold">Venue &amp; Time</th>
+                <th className="p-4 font-bold">Entries</th>
+                <th className="p-4 font-bold">Timing Feed</th>
+                <th className="p-4 font-bold">Status</th>
+                <th className="p-4 text-right font-bold">Seeding</th>
               </tr>
             </thead>
-            <tbody className="divide-y" style={{ borderColor: theme === "dark" ? "#30363D" : "#F1F3F5" }}>
+            <tbody className="divide-y animate-fadeIn" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
               {eventsList.map((evt) => (
-                <tr key={evt.id} className="hover:bg-[var(--bg-surface-variant)] transition-colors">
+                <tr key={evt.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors">
                   <td className="p-4">
-                    <p className="font-extrabold">{evt.name}</p>
-                    <p className="text-[10px] font-mono text-[#0140A7]">{evt.id} • {evt.category}</p>
+                    <p className="font-extrabold text-[var(--text-primary)]">{evt.name}</p>
+                    <p className="text-[10px] font-mono text-[#0140A7] dark:text-[#3B82F6] font-semibold mt-0.5">{evt.id} &bull; {evt.category}</p>
                   </td>
                   <td className="p-4">
-                    <p className="font-semibold">{evt.venue}</p>
-                    <p className="text-[10px]" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+                    <p className="font-bold text-[var(--text-primary)]">{evt.venue}</p>
+                    <p className="text-[10px] font-semibold mt-0.5" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
                       {evt.scheduledTime}
                     </p>
                   </td>
                   <td className="p-4 font-bold">{evt.entriesCount} Athletes</td>
-                  <td className="p-4 font-mono text-[11px]">{evt.timingDevice}</td>
+                  <td className="p-4 font-mono text-[11px] text-[#64748B] dark:text-[#94A3B8]">{evt.timingDevice}</td>
                   <td className="p-4">
                     <span
                       className="rounded-full px-2.5 py-0.5 text-[9px] font-mono font-extrabold text-white"
                       style={{
                         backgroundColor:
                           evt.status === "Live In-Progress"
-                            ? "#2E7D32"
+                            ? "#10B981"
                             : evt.status === "Completed"
-                              ? "#0288D1"
+                              ? "#3B82F6"
                               : "#0140A7",
                       }}
                     >
@@ -288,9 +291,9 @@ export default function EventsPage() {
                   <td className="p-4 text-right">
                     <button
                       onClick={() => setSeedingEvent(evt)}
-                      className="px-3 py-1.5 rounded-lg text-xs font-bold border text-[#0140A7] hover:bg-[rgba(1,64,167,0.08)] transition-all"
+                      className="px-3.5 py-2 bg-gradient-to-r from-[#0140A7] to-[#0A4870] hover:shadow-md text-white border-0 rounded-xl text-xs font-extrabold cursor-pointer hover:scale-[1.02] active:scale-95 transition-all shadow-sm"
                     >
-                      Seed Lanes →
+                      Seed Lanes &rarr;
                     </button>
                   </td>
                 </tr>
@@ -302,89 +305,190 @@ export default function EventsPage() {
 
       {/* Lane Seeding Modal */}
       {seedingEvent && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-md animate-fadeIn">
           <div
-            className="rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
+            className="rounded-3xl p-6 sm:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border transition-all"
             style={{
-              backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+              backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+              borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.6)" : "rgba(226, 232, 240, 0.8)",
             }}
           >
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h2 className="text-2xl font-extrabold tracking-tight">{seedingEvent.name} - Lane Seeding</h2>
-                <p className="text-sm mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
-                  {seedingEvent.venue} • {seedingEvent.scheduledTime} • {seedingEvent.entriesCount} Athletes
+            <div className="flex justify-between items-start mb-6 border-b pb-4" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+              <div className="flex-1">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-16 rounded-xl bg-gradient-to-br from-[#0140A7] to-[#0A4870] flex items-center justify-center text-white text-xs font-mono font-extrabold tracking-wider shadow-sm">
+                    SEEDING
+                  </div>
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[var(--text-primary)]">{seedingEvent.name}</h2>
+                    <p className="text-[10px] font-extrabold text-[#0140A7] dark:text-[#3B82F6] mt-0.5 tracking-wider uppercase">WORLD ATHLETICS LANE ASSIGNMENT ALGORITHM</p>
+                  </div>
+                </div>
+                <p className="text-xs font-semibold mt-2.5" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
+                  {seedingEvent.venue} &bull; {seedingEvent.scheduledTime} &bull; {seedingEvent.entriesCount} Entries
                 </p>
               </div>
               <button
                 onClick={() => setSeedingEvent(null)}
-                className="text-2xl hover:opacity-70 transition-opacity p-2 rounded-xl hover:bg-[#F7F8FA] dark:hover:bg-[#21262D]"
-                style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}
+                className="text-xl hover:opacity-70 transition-opacity p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-[var(--text-primary)] cursor-pointer"
               >
-                ×
+                ✕
               </button>
             </div>
 
             <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-lg font-bold mb-3">Lane Assignment Algorithm</h3>
-                  <div className="space-y-3">
-                    <div className="p-3 rounded-xl bg-[#DCEBF6] dark:bg-[rgba(1,64,167,0.1)]">
-                      <p className="text-xs font-bold text-[#0140A7] mb-1">WORLD ATHLETICS STANDARD</p>
-                      <p className="text-sm">Lanes seeded by personal best times, fastest in center lanes (4-5)</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 text-xs">
-                      <div className="p-2 rounded border text-center font-bold">Lane 1</div>
-                      <div className="p-2 rounded border text-center font-bold">Lane 2</div>
-                      <div className="p-2 rounded border text-center font-bold">Lane 3</div>
-                      <div className="p-2 rounded border text-center font-bold bg-[#FFF3CC] text-[#C98F00]">Lane 4 (FAST)</div>
-                      <div className="p-2 rounded border text-center font-bold bg-[#FFF3CC] text-[#C98F00]">Lane 5 (FAST)</div>
-                      <div className="p-2 rounded border text-center font-bold">Lane 6</div>
-                      <div className="p-2 rounded border text-center font-bold">Lane 7</div>
-                      <div className="p-2 rounded border text-center font-bold">Lane 8</div>
-                    </div>
-                  </div>
+              {/* Lane Grid Track Visualization */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-extrabold text-[var(--text-primary)] flex items-center gap-2">
+                    <span className="h-5 w-5 rounded-lg bg-[#0140A7] text-white flex items-center justify-center text-[10px] font-extrabold">1</span>
+                    Championship Running Track Seeding
+                  </h3>
+                  <span className="text-[9px] font-mono font-extrabold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded">FASTEST TO CENTER</span>
                 </div>
 
-                <div>
-                  <h3 className="text-lg font-bold mb-3">Timing System Configuration</h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Photo-finish Camera:</span>
-                      <span className="font-mono text-[#2E7D32]">{seedingEvent.timingDevice}</span>
+                <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20">
+                  <p className="text-[10px] font-black text-amber-500 uppercase tracking-wide">WORLD ATHLETICS STANDARD RULE 166</p>
+                  <p className="text-xs font-semibold text-[var(--text-primary)] mt-0.5">Fastest athletes seeded to center lanes (4 and 5) for optimal straightline wind and competitor drafting visual control.</p>
+                </div>
+
+                {/* ── Visual terracotta track lanes ── */}
+                <div className="rounded-2xl border overflow-hidden p-3 bg-slate-900/10 dark:bg-slate-950/40 space-y-1.5" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+                  {[
+                    { lane: 1, name: "S. Barega", mark: "13:02.10", active: false },
+                    { lane: 2, name: "L. Girma", mark: "12:59.88", active: false },
+                    { lane: 3, name: "Y. Kejelcha", mark: "12:55.80", active: false },
+                    { lane: 4, name: "K. Bekele", mark: "12:54.12", active: true },
+                    { lane: 5, name: "H. Gebrselassie", mark: "12:54.90", active: true },
+                    { lane: 6, name: "H. Gebrhiwet", mark: "12:56.04", active: false },
+                    { lane: 7, name: "T. Haile", mark: "13:01.45", active: false },
+                    { lane: 8, name: "M. Edris", mark: "13:04.90", active: false },
+                  ].map((item) => (
+                    <div
+                      key={item.lane}
+                      className={`relative flex items-center justify-between px-4 py-2.5 rounded-xl border transition-all ${
+                        item.active
+                          ? "bg-[#A63F2C] border-amber-400 text-white shadow-md shadow-amber-500/10 scale-[1.01]"
+                          : "bg-[#872D1E] border-[#A13A28] text-white/90"
+                      }`}
+                    >
+                      {/* Lane line indicator */}
+                      <div className="absolute inset-x-0 top-0 h-[1px] border-t border-dashed border-white/20 pointer-events-none" />
+                      <div className="absolute inset-x-0 bottom-0 h-[1px] border-b border-dashed border-white/20 pointer-events-none" />
+
+                      <div className="flex items-center gap-3 relative z-10">
+                        <span className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-mono font-black ${
+                          item.active ? "bg-amber-400 text-amber-950" : "bg-white/20 text-white"
+                        }`}>
+                          {item.lane}
+                        </span>
+                        <div>
+                          <span className="font-extrabold text-xs tracking-wide">{item.name}</span>
+                          {item.active && (
+                            <span className="ml-2 text-[8px] font-mono font-extrabold text-amber-300 uppercase tracking-widest bg-amber-950/50 px-1.5 py-0.5 rounded">FASTEST SEED</span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 relative z-10">
+                        <span className="font-mono text-xs font-extrabold bg-black/25 px-2 py-0.5 rounded text-white/95">{item.mark}</span>
+                        <span className="text-[10px] opacity-70">🏃</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Wind Speed Monitor:</span>
-                      <span className="font-mono text-[#0140A7]">{seedingEvent.windSpeed || "N/A"}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Hardware / Timing Status grid */}
+              <div className="space-y-3">
+                <h3 className="text-sm font-extrabold text-[var(--text-primary)] flex items-center gap-2">
+                  <span className="h-5 w-5 rounded-lg bg-[#10B981] text-white flex items-center justify-center text-[10px] font-extrabold">2</span>
+                  Seeding Hardware Integration
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Photo Finish status */}
+                  <div
+                    className="p-4 rounded-2xl border shadow-xs flex flex-col justify-between"
+                    style={{
+                      backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.2)" : "#F8FAFC",
+                      borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] font-extrabold text-[#64748B] dark:text-[#94A3B8] uppercase">Photo-finish Camera</span>
+                      <span className="flex items-center gap-1.5 text-[9px] font-mono font-extrabold text-[#10B981] bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                        </span>
+                        SYNCED
+                      </span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>False Start Detection:</span>
-                      <span className="font-mono text-[#C98F00]">0.100s RULE</span>
+                    <p className="text-xs font-mono font-extrabold text-[var(--text-primary)] mt-1">{seedingEvent.timingDevice}</p>
+                  </div>
+
+                  {/* Wind speed gauge status */}
+                  <div
+                    className="p-4 rounded-2xl border shadow-xs flex flex-col justify-between"
+                    style={{
+                      backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.2)" : "#F8FAFC",
+                      borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] font-extrabold text-[#64748B] dark:text-[#94A3B8] uppercase">Wind Monitor</span>
+                      <span className="flex items-center gap-1.5 text-[9px] font-mono font-extrabold text-[#3B82F6] bg-blue-500/10 px-2 py-0.5 rounded-full">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
+                        </span>
+                        VALID
+                      </span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Lane Assignment Status:</span>
-                      <span className="font-bold text-[#F59E0B]">PENDING SEEDING</span>
+                    <p className="text-xs font-mono font-extrabold text-[var(--text-primary)] mt-1">{seedingEvent.windSpeed || "RFID Feed Active"}</p>
+                  </div>
+
+                  {/* False start status */}
+                  <div
+                    className="p-4 rounded-2xl border shadow-xs flex flex-col justify-between"
+                    style={{
+                      backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.2)" : "#F8FAFC",
+                      borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] font-extrabold text-[#64748B] dark:text-[#94A3B8] uppercase">Gun Control Unit</span>
+                      <span className="flex items-center gap-1.5 text-[9px] font-mono font-extrabold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+                        </span>
+                        ARMED
+                      </span>
                     </div>
+                    <p className="text-xs font-mono font-extrabold text-[var(--text-primary)] mt-1">0.100s REACTION THRESHOLD</p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex gap-3 pt-4 border-t" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
+              {/* Action Buttons */}
+              <div className="flex gap-3 pt-4 border-t" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
                 <button
                   onClick={() => {
-                    // Simulate seeding process
                     setSeedingEvent(null);
                   }}
-                  className="flex-1 bg-[#2E7D32] text-white py-3.5 rounded-xl font-extrabold hover:bg-[#1B5E20] transition-all shadow-lg"
+                  className="flex-1 bg-gradient-to-r from-[#0140A7] to-[#0A4870] text-white py-3.5 rounded-2xl font-extrabold hover:shadow-lg transform active:scale-95 transition-all text-xs cursor-pointer"
                 >
                   Execute Lane Seeding Algorithm
                 </button>
                 <button
                   onClick={() => setSeedingEvent(null)}
-                  className="px-8 py-3.5 rounded-xl font-bold transition-all hover:bg-[#F7F8FA] dark:hover:bg-[#21262D]"
+                  className="px-6 py-3.5 rounded-2xl font-extrabold transition-all text-xs border cursor-pointer active:scale-95"
                   style={{
-                    color: theme === "dark" ? "#8B949E" : "#555B63",
+                    backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.3)" : "#FFFFFF",
+                    borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
+                    color: theme === "dark" ? "#F8FAFC" : "#0F172A",
                   }}
                 >
                   Cancel

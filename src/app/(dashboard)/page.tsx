@@ -91,8 +91,10 @@ export default function FederationDashboardPage() {
           <button
             onClick={runSystemAudit}
             disabled={auditing}
-            className="flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-extrabold text-white shadow-lg transition-all active:scale-[0.98] disabled:opacity-50"
-            style={{ backgroundColor: "#0140A7" }}
+            className="flex items-center gap-2 rounded-2xl px-5 py-3 text-xs font-extrabold text-white shadow-lg transition-all active:scale-[0.98] disabled:opacity-50 hover:shadow-blue-500/20 cursor-pointer"
+            style={{
+              background: "linear-gradient(135deg, #0140A7 0%, #0288D1 100%)",
+            }}
           >
             {auditing ? (
               <>
@@ -101,7 +103,11 @@ export default function FederationDashboardPage() {
               </>
             ) : (
               <>
-                <span className="text-sm font-bold">AUDIT</span> Run Biometric System Audit
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="text-xs font-extrabold tracking-wide uppercase">Run Biometric Audit</span>
               </>
             )}
           </button>
@@ -109,8 +115,8 @@ export default function FederationDashboardPage() {
       </div>
 
       {auditDone && (
-        <div className="p-4 rounded-2xl bg-[rgba(46,125,50,0.12)] border border-[rgba(46,125,50,0.3)] text-[#2E7D32] text-xs font-bold flex items-center gap-2 animate-fadeIn">
-          <span>✅</span> Biometric Registry Audit complete: 15,482 athlete FAN tokens validated with 0 unresolved integrity breaks.
+        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-[#10B981] text-xs font-bold flex items-center gap-2.5 animate-fadeIn shadow-sm">
+          <span>🛡️</span> Biometric Registry Audit complete: 15,482 athlete FAN tokens validated with 0 unresolved integrity breaks.
         </div>
       )}
 
@@ -119,26 +125,27 @@ export default function FederationDashboardPage() {
         {statCards.map((card) => (
           <div
             key={card.title}
-            className="rounded-2xl p-5 shadow-lg transition-all hover:shadow-xl space-y-3"
+            className="rounded-2xl p-5 border shadow-sm transition-all hover-lift hover:shadow-md space-y-3"
             style={{
-              backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+              backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+              borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
             }}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold bg-[rgba(1,64,167,0.1)] text-[#0140A7] px-2 py-1 rounded">{card.icon}</span>
+              <span className="text-[10px] font-mono font-extrabold bg-[rgba(1,64,167,0.08)] text-[#0140A7] px-2.5 py-1 rounded-lg">{card.icon}</span>
               <span
-                className="rounded-full px-2.5 py-0.5 text-[9px] font-mono font-bold"
+                className="rounded-full px-2.5 py-0.5 text-[9px] font-mono font-extrabold"
                 style={{ backgroundColor: card.badgeBg, color: card.badgeColor }}
               >
                 {card.badge}
               </span>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-extrabold">{card.value}</p>
-              <p className="text-xs font-bold mt-0.5" style={{ color: theme === "dark" ? "#F0F2F5" : "#1D1D1F" }}>
+              <p className="text-2xl sm:text-3xl font-black tracking-tight">{card.value}</p>
+              <p className="text-xs font-bold mt-1" style={{ color: theme === "dark" ? "#F8FAFC" : "#0F172A" }}>
                 {card.title}
               </p>
-              <p className="text-[11px] mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+              <p className="text-[11px] mt-1.5 font-semibold" style={{ color: theme === "dark" ? "#94A3B8" : "#64748B" }}>
                 {card.sub}
               </p>
             </div>
@@ -150,84 +157,91 @@ export default function FederationDashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Link
           href="/verification"
-          className="group rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4"
+          className="group rounded-2xl p-6 border shadow-sm hover-lift hover:shadow-md transition-all flex flex-col justify-between space-y-4"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
           <div className="space-y-3">
-            <div className="h-12 w-12 rounded-xl flex items-center justify-center text-xs font-extrabold bg-[rgba(245,158,11,0.15)] text-[#F59E0B] tracking-tight">
+            <div className="h-10 w-16 rounded-xl flex items-center justify-center text-[10px] font-mono font-extrabold bg-amber-500/10 text-amber-500 tracking-wider">
               VERIFY
             </div>
-            <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors">
+            <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors text-[var(--text-primary)]">
               Verification Audit Queue
             </h3>
-            <p className="text-xs leading-relaxed" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
+            <p className="text-xs leading-relaxed" style={{ color: theme === "dark" ? "#94A3B8" : "#475569" }}>
               Audit pending Fayda FAN registrations, resolve flagged age discrepancies, and grant official federation licenses.
             </p>
           </div>
-          <span className="text-xs font-extrabold text-[#0140A7] group-hover:underline">
-            Open Verification Control →
+          <span className="text-xs font-extrabold text-[#0140A7] dark:text-[#3B82F6] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            Open Verification Control <span className="text-sm">→</span>
           </span>
         </Link>
 
         <Link
           href="/events"
-          className="group rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4"
+          className="group rounded-2xl p-6 border shadow-sm hover-lift hover:shadow-md transition-all flex flex-col justify-between space-y-4"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
           <div className="space-y-3">
-            <div className="h-12 w-12 rounded-xl flex items-center justify-center text-xs font-extrabold bg-[rgba(46,125,50,0.15)] text-[#2E7D32] tracking-tight">
+            <div className="h-10 w-16 rounded-xl flex items-center justify-center text-[10px] font-mono font-extrabold bg-emerald-500/10 text-emerald-500 tracking-wider">
               EVENTS
             </div>
-            <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors">
+            <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors text-[var(--text-primary)]">
               Events Setup &amp; Seeding
             </h3>
-            <p className="text-xs leading-relaxed" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
+            <p className="text-xs leading-relaxed" style={{ color: theme === "dark" ? "#94A3B8" : "#475569" }}>
               Configure track heats, seed lanes using World Athletics algorithms, and verify FinishLynx photo-finish links.
             </p>
           </div>
-          <span className="text-xs font-extrabold text-[#0140A7] group-hover:underline">
-            Open Events Control →
+          <span className="text-xs font-extrabold text-[#0140A7] dark:text-[#3B82F6] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            Open Events Control <span className="text-sm">→</span>
           </span>
         </Link>
 
         <Link
           href="/results"
-          className="group rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4"
+          className="group rounded-2xl p-6 border shadow-sm hover-lift hover:shadow-md transition-all flex flex-col justify-between space-y-4"
           style={{
-            backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+            backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+            borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
           }}
         >
           <div className="space-y-3">
-            <div className="h-12 w-12 rounded-xl flex items-center justify-center text-xs font-extrabold bg-[rgba(2,136,209,0.15)] text-[#0288D1] tracking-tight">
+            <div className="h-10 w-16 rounded-xl flex items-center justify-center text-[10px] font-mono font-extrabold bg-blue-500/10 text-blue-500 tracking-wider">
               RESULTS
             </div>
-            <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors">
+            <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors text-[var(--text-primary)]">
               Results &amp; Live Timing Portal
             </h3>
-            <p className="text-xs leading-relaxed" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
+            <p className="text-xs leading-relaxed" style={{ color: theme === "dark" ? "#94A3B8" : "#475569" }}>
               Monitor live competition standings, photo-finish timings, wind gauge readings, and export official EAF certificates.
             </p>
           </div>
-          <span className="text-xs font-extrabold text-[#0140A7] group-hover:underline">
-            View Live Results →
+          <span className="text-xs font-extrabold text-[#0140A7] dark:text-[#3B82F6] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            View Live Results <span className="text-sm">→</span>
           </span>
         </Link>
       </div>
 
       {/* ── SYSTEMIC LOGS SECTION ── */}
       <div
-        className="rounded-2xl p-6 shadow-sm space-y-4"
+        className="rounded-2xl p-6 border shadow-sm space-y-5"
         style={{
-          backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+          backgroundColor: theme === "dark" ? "#131B2E" : "#FFFFFF",
+          borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
         }}
       >
-        <div className="flex items-center justify-between">
-          <h3 className="font-extrabold text-base">Federation Operation Logs</h3>
-          <span className="text-[10px] font-mono font-bold text-[#0140A7] bg-[rgba(1,64,167,0.1)] px-2 py-1 rounded-md">
+        <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)" }}>
+          <div>
+            <h3 className="font-extrabold text-base text-[var(--text-primary)]">Federation Operation Logs</h3>
+            <p className="text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] mt-0.5">Real-time system telemetry and transaction audit log</p>
+          </div>
+          <span className="text-[9px] font-mono font-extrabold text-[#0140A7] bg-[rgba(1,64,167,0.08)] px-2.5 py-1 rounded-lg">
             LIVE AUDIT STREAM
           </span>
         </div>
@@ -236,20 +250,21 @@ export default function FederationDashboardPage() {
           {recentLogs.map((log) => (
             <div
               key={log.id}
-              className="p-3.5 rounded-xl flex items-start gap-3 text-xs"
+              className="p-4 rounded-xl flex items-start gap-4 text-xs transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/40 border"
               style={{
-                backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
+                backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.2)" : "#F8FAFC",
+                borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.3)" : "rgba(226, 232, 240, 0.6)",
               }}
             >
               <span
-                className="rounded-md px-2 py-0.5 text-[9px] font-mono font-bold uppercase shrink-0"
+                className="rounded-md px-2 py-0.5 text-[9px] font-mono font-extrabold uppercase shrink-0"
                 style={{ backgroundColor: log.badgeBg, color: log.badgeColor }}
               >
                 {log.type}
               </span>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold leading-tight">{log.text}</p>
-                <p className="text-[10px] font-mono mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#8B9098" }}>
+                <p className="font-bold leading-relaxed text-[var(--text-primary)]">{log.text}</p>
+                <p className="text-[10px] font-mono mt-1 font-semibold" style={{ color: theme === "dark" ? "#64748B" : "#8B9098" }}>
                   {log.time}
                 </p>
               </div>
