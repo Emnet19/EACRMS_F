@@ -29,7 +29,7 @@ export default function LoginPage() {
             borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
           }}
         >
-          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          {theme === "light" ? "Dark Mode" : "Light Mode"}
         </button>
       </div>
 

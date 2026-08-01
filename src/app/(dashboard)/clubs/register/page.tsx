@@ -52,8 +52,8 @@ export default function ClubRegistrationPage() {
           >
             <span className="text-xl">←</span>
           </button>
-          <div className="h-10 w-10 rounded-xl bg-[#0140A7] flex items-center justify-center text-white text-xl">
-            🏢
+          <div className="h-10 w-10 rounded-xl bg-[#0140A7] flex items-center justify-center text-white text-xs font-bold">
+            CLUB
           </div>
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight">Register New Club</h1>

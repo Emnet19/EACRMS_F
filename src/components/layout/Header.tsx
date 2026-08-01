@@ -56,7 +56,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
         {/* Theme Toggle - Icon Only */}
         <button
           onClick={toggleTheme}
-          className="flex items-center justify-center rounded-lg p-2 text-base transition-all border hover:scale-105 opacity-70 hover:opacity-90"
+          className="flex items-center justify-center rounded-lg px-3 py-1 text-xs font-bold transition-all border hover:scale-105 opacity-70 hover:opacity-90"
           style={{
             backgroundColor: theme === "dark" ? "#1C2128" : "#F6F8FA",
             borderColor: theme === "dark" ? "#373E47" : "#D0D7DE",
@@ -64,7 +64,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
           }}
           title={`Switch to ${theme === "light" ? "Dark" : "Light"} Mode`}
         >
-          {theme === "light" ? "🌙" : "☀️"}
+          {theme === "light" ? "DARK" : "LIGHT"}
         </button>
 
         {user ? (

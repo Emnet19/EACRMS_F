@@ -56,8 +56,8 @@ export default function ClubRegistrationForm({ onClose }: ClubRegistrationFormPr
         <div className="flex justify-between items-start mb-6">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="h-8 w-8 rounded-lg bg-[#0140A7] flex items-center justify-center text-white text-sm">
-                🏢
+              <div className="h-8 w-8 rounded-lg bg-[#0140A7] flex items-center justify-center text-white text-xs font-bold">
+                CLUB
               </div>
               <h2 className="text-2xl font-bold tracking-tight">Register New Club</h2>
             </div>

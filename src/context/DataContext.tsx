@@ -56,6 +56,42 @@ const INITIAL_CLUBS: Club[] = [
     headCoach: "Hussein Shibo",
     status: "Accredited",
   },
+  {
+    id: "CLUB-03",
+    name: "Ethio Electric Athletics Club",
+    region: "Federal Corporate",
+    athletesCount: 96,
+    verificationRate: 97.8,
+    headCoach: "Woldemeskel Kostre",
+    status: "Accredited",
+  },
+  {
+    id: "CLUB-04",
+    name: "Banks Athletics Club (Bankoch)",
+    region: "Federal Corporate",
+    athletesCount: 110,
+    verificationRate: 98.5,
+    headCoach: "Yilma Berta",
+    status: "Accredited",
+  },
+  {
+    id: "CLUB-05",
+    name: "Arada Athletics Club",
+    region: "Addis Ababa City Administration",
+    athletesCount: 64,
+    verificationRate: 89.0,
+    headCoach: "Gezahegne Abera",
+    status: "Audit Required",
+  },
+  {
+    id: "CLUB-06",
+    name: "Sidama Coffee Athletics Club",
+    region: "Sidama Region",
+    athletesCount: 78,
+    verificationRate: 96.1,
+    headCoach: "Miruts Yifter",
+    status: "Accredited",
+  },
 ];
 
 const INITIAL_ATHLETES: { [clubId: string]: Athlete[] } = {

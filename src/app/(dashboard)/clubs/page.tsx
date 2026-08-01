@@ -99,7 +99,7 @@ export default function ClubsPage() {
             <div>
               <h3 className="font-extrabold text-base leading-tight">{club.name}</h3>
               <p className="text-sm mt-0.5 flex items-center gap-1" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
-                <span>📍</span>
+                <span className="text-xs font-bold">REGION:</span>
                 <span>{club.region}</span>
               </p>
             </div>

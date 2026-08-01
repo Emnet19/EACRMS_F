@@ -53,15 +53,15 @@
 
 .dark {
   /* Brand Tokens - Dark */
-  --bg-default: #0D1117;
-  --bg-surface: #161B22;
-  --bg-surface-variant: #21262D;
+  --bg-default: #0F1419;
+  --bg-surface: #1A1F26;
+  --bg-surface-variant: #252B34;
 
-  --text-primary: #F0F2F5;
-  --text-secondary: #C9D1D9;
-  --text-tertiary: #8B949E;
+  --text-primary: #EAEEF2;
+  --text-secondary: #C5CCDA;
+  --text-tertiary: #8B95A6;
 
-  --border-default: #30363D;
+  --border-default: #3A4351;
 
   --brand-primary-light: #0A4870;
   --brand-secondary-light: #3D2E00;
@@ -75,11 +75,11 @@
   /* Shadcn Variables - Dark */
   --primary: var(--brand-primary);
   --primary-foreground: var(--text-on-primary);
-  --secondary: #21262D;
+  --secondary: #252B34;
   --secondary-foreground: var(--text-primary);
-  --muted: #161B22;
+  --muted: #1A1F26;
   --muted-foreground: var(--text-secondary);
-  --accent: #21262D;
+  --accent: #252B34;
   --accent-foreground: var(--text-primary);
   --destructive: var(--status-error);
   --destructive-foreground: var(--text-on-primary);

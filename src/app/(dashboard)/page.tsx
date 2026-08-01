@@ -29,7 +29,7 @@ export default function FederationDashboardPage() {
       badge: "Verified",
       badgeBg: "rgba(46, 125, 50, 0.15)",
       badgeColor: "#2E7D32",
-      icon: "🆔",
+      icon: "ID",
     },
     {
       title: "Registered Clubs",
@@ -38,7 +38,7 @@ export default function FederationDashboardPage() {
       badge: "Active",
       badgeBg: "rgba(1, 64, 167, 0.15)",
       badgeColor: "#0140A7",
-      icon: "🏛️",
+      icon: "ORG",
     },
     {
       title: "Pending Verification Queues",
@@ -47,7 +47,7 @@ export default function FederationDashboardPage() {
       badge: "Action Required",
       badgeBg: "rgba(245, 158, 11, 0.15)",
       badgeColor: "#F59E0B",
-      icon: "⏳",
+      icon: "PENDING",
     },
     {
       title: "Live Timing Ingestors",
@@ -56,7 +56,7 @@ export default function FederationDashboardPage() {
       badge: "Live Feed",
       badgeBg: "rgba(2, 136, 209, 0.15)",
       badgeColor: "#0288D1",
-      icon: "⏱️",
+      icon: "LIVE",
     },
   ];
 
@@ -101,7 +101,7 @@ export default function FederationDashboardPage() {
               </>
             ) : (
               <>
-                <span>🛡️</span> Run Biometric System Audit
+                <span className="text-sm font-bold">AUDIT</span> Run Biometric System Audit
               </>
             )}
           </button>
@@ -125,7 +125,7 @@ export default function FederationDashboardPage() {
             }}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xl">{card.icon}</span>
+              <span className="text-xs font-bold bg-[rgba(1,64,167,0.1)] text-[#0140A7] px-2 py-1 rounded">{card.icon}</span>
               <span
                 className="rounded-full px-2.5 py-0.5 text-[9px] font-mono font-bold"
                 style={{ backgroundColor: card.badgeBg, color: card.badgeColor }}
@@ -155,9 +155,9 @@ export default function FederationDashboardPage() {
             backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
           }}
         >
-          <div className="space-y-2">
-            <div className="h-10 w-10 rounded-xl flex items-center justify-center text-xl bg-[rgba(245,158,11,0.15)] text-[#F59E0B]">
-              🆔
+          <div className="space-y-3">
+            <div className="h-12 w-12 rounded-xl flex items-center justify-center text-xs font-extrabold bg-[rgba(245,158,11,0.15)] text-[#F59E0B] tracking-tight">
+              VERIFY
             </div>
             <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors">
               Verification Audit Queue
@@ -178,9 +178,9 @@ export default function FederationDashboardPage() {
             backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
           }}
         >
-          <div className="space-y-2">
-            <div className="h-10 w-10 rounded-xl flex items-center justify-center text-xl bg-[rgba(46,125,50,0.15)] text-[#2E7D32]">
-              🏃
+          <div className="space-y-3">
+            <div className="h-12 w-12 rounded-xl flex items-center justify-center text-xs font-extrabold bg-[rgba(46,125,50,0.15)] text-[#2E7D32] tracking-tight">
+              EVENTS
             </div>
             <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors">
               Events Setup &amp; Seeding
@@ -201,9 +201,9 @@ export default function FederationDashboardPage() {
             backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
           }}
         >
-          <div className="space-y-2">
-            <div className="h-10 w-10 rounded-xl flex items-center justify-center text-xl bg-[rgba(2,136,209,0.15)] text-[#0288D1]">
-              📊
+          <div className="space-y-3">
+            <div className="h-12 w-12 rounded-xl flex items-center justify-center text-xs font-extrabold bg-[rgba(2,136,209,0.15)] text-[#0288D1] tracking-tight">
+              RESULTS
             </div>
             <h3 className="font-extrabold text-base group-hover:text-[#0140A7] transition-colors">
               Results &amp; Live Timing Portal

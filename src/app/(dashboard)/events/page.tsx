@@ -67,6 +67,7 @@ export default function EventsPage() {
   const [newEventName, setNewEventName] = useState("");
   const [newEventCategory, setNewEventCategory] = useState<"Track" | "Field" | "Road">("Track");
   const [isAdding, setIsAdding] = useState(false);
+  const [seedingEvent, setSeedingEvent] = useState<RaceEvent | null>(null);
 
   const handleCreateEvent = (e: React.FormEvent) => {
     e.preventDefault();
@@ -210,8 +211,8 @@ export default function EventsPage() {
             borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
           }}
         >
-          <div className="h-10 w-10 rounded-xl bg-[rgba(230,165,0,0.15)] text-[#E6A500] flex items-center justify-center font-bold text-lg">
-            ⏱️
+          <div className="h-10 w-10 rounded-xl bg-[rgba(230,165,0,0.15)] text-[#E6A500] flex items-center justify-center font-bold text-xs">
+            TIMER
           </div>
           <div>
             <p className="font-extrabold text-xs">False Start Gun System</p>
@@ -277,15 +278,18 @@ export default function EventsPage() {
                           evt.status === "Live In-Progress"
                             ? "#2E7D32"
                             : evt.status === "Completed"
-                            ? "#0288D1"
-                            : "#0140A7",
+                              ? "#0288D1"
+                              : "#0140A7",
                       }}
                     >
                       {evt.status}
                     </span>
                   </td>
                   <td className="p-4 text-right">
-                    <button className="px-3 py-1.5 rounded-lg text-xs font-bold border text-[#0140A7] hover:bg-[rgba(1,64,167,0.08)]">
+                    <button
+                      onClick={() => setSeedingEvent(evt)}
+                      className="px-3 py-1.5 rounded-lg text-xs font-bold border text-[#0140A7] hover:bg-[rgba(1,64,167,0.08)] transition-all"
+                    >
                       Seed Lanes →
                     </button>
                   </td>
@@ -295,6 +299,101 @@ export default function EventsPage() {
           </table>
         </div>
       </div>
+
+      {/* Lane Seeding Modal */}
+      {seedingEvent && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+          <div
+            className="rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl"
+            style={{
+              backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
+            }}
+          >
+            <div className="flex justify-between items-start mb-6">
+              <div>
+                <h2 className="text-2xl font-extrabold tracking-tight">{seedingEvent.name} - Lane Seeding</h2>
+                <p className="text-sm mt-1" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
+                  {seedingEvent.venue} • {seedingEvent.scheduledTime} • {seedingEvent.entriesCount} Athletes
+                </p>
+              </div>
+              <button
+                onClick={() => setSeedingEvent(null)}
+                className="text-2xl hover:opacity-70 transition-opacity p-2 rounded-xl hover:bg-[#F7F8FA] dark:hover:bg-[#21262D]"
+                style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-lg font-bold mb-3">Lane Assignment Algorithm</h3>
+                  <div className="space-y-3">
+                    <div className="p-3 rounded-xl bg-[#DCEBF6] dark:bg-[rgba(1,64,167,0.1)]">
+                      <p className="text-xs font-bold text-[#0140A7] mb-1">WORLD ATHLETICS STANDARD</p>
+                      <p className="text-sm">Lanes seeded by personal best times, fastest in center lanes (4-5)</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div className="p-2 rounded border text-center font-bold">Lane 1</div>
+                      <div className="p-2 rounded border text-center font-bold">Lane 2</div>
+                      <div className="p-2 rounded border text-center font-bold">Lane 3</div>
+                      <div className="p-2 rounded border text-center font-bold bg-[#FFF3CC] text-[#C98F00]">Lane 4 (FAST)</div>
+                      <div className="p-2 rounded border text-center font-bold bg-[#FFF3CC] text-[#C98F00]">Lane 5 (FAST)</div>
+                      <div className="p-2 rounded border text-center font-bold">Lane 6</div>
+                      <div className="p-2 rounded border text-center font-bold">Lane 7</div>
+                      <div className="p-2 rounded border text-center font-bold">Lane 8</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-bold mb-3">Timing System Configuration</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span>Photo-finish Camera:</span>
+                      <span className="font-mono text-[#2E7D32]">{seedingEvent.timingDevice}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Wind Speed Monitor:</span>
+                      <span className="font-mono text-[#0140A7]">{seedingEvent.windSpeed || "N/A"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>False Start Detection:</span>
+                      <span className="font-mono text-[#C98F00]">0.100s RULE</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Lane Assignment Status:</span>
+                      <span className="font-bold text-[#F59E0B]">PENDING SEEDING</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-4 border-t" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
+                <button
+                  onClick={() => {
+                    // Simulate seeding process
+                    setSeedingEvent(null);
+                  }}
+                  className="flex-1 bg-[#2E7D32] text-white py-3.5 rounded-xl font-extrabold hover:bg-[#1B5E20] transition-all shadow-lg"
+                >
+                  Execute Lane Seeding Algorithm
+                </button>
+                <button
+                  onClick={() => setSeedingEvent(null)}
+                  className="px-8 py-3.5 rounded-xl font-bold transition-all hover:bg-[#F7F8FA] dark:hover:bg-[#21262D]"
+                  style={{
+                    color: theme === "dark" ? "#8B949E" : "#555B63",
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

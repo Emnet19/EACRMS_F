@@ -102,8 +102,8 @@ export default function AthleteRegistrationPage() {
           >
             <span className="text-xl">←</span>
           </button>
-          <div className="h-10 w-10 rounded-xl bg-[#2E7D32] flex items-center justify-center text-white text-xl">
-            🏃
+          <div className="h-10 w-10 rounded-xl bg-[#2E7D32] flex items-center justify-center text-white text-xs font-bold">
+            ATHLETE
           </div>
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight">Register Athlete Member</h1>
@@ -213,12 +213,12 @@ export default function AthleteRegistrationPage() {
                 maxLength={19}
               />
               <p className="text-xs mt-3 flex items-start gap-2" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
-                <span>ℹ️</span>
+                <span className="font-bold text-[#0140A7]">INFO:</span>
                 <span>Enter the athlete's biometric Fayda National ID. An OTP will be sent to the registered phone number.</span>
               </p>
               {faydaId && faydaId.replace(/\s+/g, '').length < 16 && (
                 <p className="text-xs mt-2 text-[#D32F2F] flex items-center gap-1">
-                  <span>⚠️</span>
+                  <span className="font-bold">WARNING:</span>
                   <span>Fayda ID must be at least 16 characters long</span>
                 </p>
               )}
@@ -265,12 +265,12 @@ export default function AthleteRegistrationPage() {
                 placeholder="123456"
               />
               <p className="text-xs mt-3 text-center flex items-center justify-center gap-2" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
-                <span>📱</span>
+                <span className="font-bold text-[#0140A7]">SMS:</span>
                 <span>Enter the 6-digit code sent to the athlete's phone</span>
               </p>
               {otp && (otp.length !== 6 || otp === "000000" || otp === "0000") && (
                 <p className="text-xs mt-2 text-[#D32F2F] text-center flex items-center justify-center gap-1">
-                  <span>⚠️</span>
+                  <span className="font-bold">ERROR:</span>
                   <span>Please enter a valid 6-digit OTP code</span>
                 </p>
               )}

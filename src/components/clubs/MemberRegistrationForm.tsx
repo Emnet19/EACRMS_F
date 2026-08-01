@@ -83,8 +83,8 @@ export default function MemberRegistrationForm({ onClose }: MemberRegistrationFo
         <div className="flex justify-between items-start mb-6">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="h-8 w-8 rounded-lg bg-[#E6A500] flex items-center justify-center text-white text-sm">
-                👤
+              <div className="h-8 w-8 rounded-lg bg-[#E6A500] flex items-center justify-center text-white text-xs font-bold">
+                ATH
               </div>
               <h2 className="text-2xl font-bold tracking-tight">Register Athlete</h2>
             </div>
@@ -192,7 +192,7 @@ export default function MemberRegistrationForm({ onClose }: MemberRegistrationFo
                 placeholder="FAN-XXXX-XXXX-XXXX"
               />
               <p className="text-xs mt-3 flex items-start gap-2" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
-                <span>ℹ️</span>
+                <span className="font-bold text-[#E6A500]">INFO:</span>
                 <span>Enter the athlete's biometric Fayda National ID. An OTP will be sent to the registered phone number.</span>
               </p>
             </div>
@@ -225,7 +225,7 @@ export default function MemberRegistrationForm({ onClose }: MemberRegistrationFo
                 placeholder="000000"
               />
               <p className="text-xs mt-3 text-center flex items-center justify-center gap-2" style={{ color: theme === "dark" ? "#8B949E" : "#6B7280" }}>
-                <span>📱</span>
+                <span className="font-bold text-[#E6A500]">SMS:</span>
                 <span>Enter the 6-digit code sent to the athlete's phone</span>
               </p>
             </div>

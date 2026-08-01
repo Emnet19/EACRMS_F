@@ -280,8 +280,8 @@ export default function VerificationPage() {
                             app.status === "Verified"
                               ? "#2E7D32"
                               : app.status === "Flagged"
-                              ? "#D32F2F"
-                              : "#F59E0B",
+                                ? "#D32F2F"
+                                : "#F59E0B",
                         }}
                       >
                         {app.status}
@@ -347,7 +347,7 @@ export default function VerificationPage() {
 
                 {selectedApp.flagReason && (
                   <div className="p-3 rounded-xl bg-[rgba(211,47,47,0.1)] border border-[rgba(211,47,47,0.3)] text-[#D32F2F] text-xs font-semibold space-y-1">
-                    <p className="font-bold">⚠️ Flag Reason:</p>
+                    <p className="font-bold text-[#D32F2F]">FLAG REASON:</p>
                     <p>{selectedApp.flagReason}</p>
                   </div>
                 )}

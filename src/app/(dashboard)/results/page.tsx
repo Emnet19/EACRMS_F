@@ -15,63 +15,174 @@ interface ResultItem {
   recordNote?: string;
 }
 
-const RESULTS_DATA: ResultItem[] = [
-  {
-    rank: 1,
-    athleteName: "Kenenisa Bekele",
-    club: "Defense Athletics Club",
-    bib: "BIB-101",
-    timeMark: "12:54.12",
-    reactionTime: "0.142s",
-    windSpeed: "+0.8 m/s",
-    status: "Gold",
-    recordNote: "Championship Record (CR)",
-  },
-  {
-    rank: 2,
-    athleteName: "Yomif Kejelcha",
-    club: "Oromia Athletics Club",
-    bib: "BIB-104",
-    timeMark: "12:55.80",
-    reactionTime: "0.150s",
-    windSpeed: "+0.8 m/s",
-    status: "Silver",
-  },
-  {
-    rank: 3,
-    athleteName: "Hagos Gebrhiwet",
-    club: "Tigray Athletics Club",
-    bib: "BIB-108",
-    timeMark: "12:56.04",
-    reactionTime: "0.138s",
-    windSpeed: "+0.8 m/s",
-    status: "Bronze",
-  },
-  {
-    rank: 4,
-    athleteName: "Telahun Haile",
-    club: "Sidama Coffee Athletics",
-    bib: "BIB-112",
-    timeMark: "13:01.45",
-    reactionTime: "0.161s",
-    windSpeed: "+0.8 m/s",
-    status: "Qualified",
-  },
-  {
-    rank: 5,
-    athleteName: "Muktar Edris",
-    club: "Ethio Electric Athletics",
-    bib: "BIB-115",
-    timeMark: "13:04.90",
-    reactionTime: "0.155s",
-    windSpeed: "+0.8 m/s",
-    status: "Qualified",
-  },
-];
+// Event-specific results data
+const EVENT_RESULTS: Record<string, ResultItem[]> = {
+  "5000m Men Final": [
+    {
+      rank: 1,
+      athleteName: "Kenenisa Bekele",
+      club: "Defense Athletics Club",
+      bib: "BIB-101",
+      timeMark: "12:54.12",
+      reactionTime: "0.142s",
+      windSpeed: "+0.8 m/s",
+      status: "Gold",
+      recordNote: "Championship Record (CR)",
+    },
+    {
+      rank: 2,
+      athleteName: "Yomif Kejelcha",
+      club: "Oromia Athletics Club",
+      bib: "BIB-104",
+      timeMark: "12:55.80",
+      reactionTime: "0.150s",
+      windSpeed: "+0.8 m/s",
+      status: "Silver",
+    },
+    {
+      rank: 3,
+      athleteName: "Hagos Gebrhiwet",
+      club: "Tigray Athletics Club",
+      bib: "BIB-108",
+      timeMark: "12:56.04",
+      reactionTime: "0.138s",
+      windSpeed: "+0.8 m/s",
+      status: "Bronze",
+    },
+    {
+      rank: 4,
+      athleteName: "Telahun Haile",
+      club: "Sidama Coffee Athletics",
+      bib: "BIB-112",
+      timeMark: "13:01.45",
+      reactionTime: "0.161s",
+      windSpeed: "+0.8 m/s",
+      status: "Qualified",
+    },
+    {
+      rank: 5,
+      athleteName: "Muktar Edris",
+      club: "Ethio Electric Athletics",
+      bib: "BIB-115",
+      timeMark: "13:04.90",
+      reactionTime: "0.155s",
+      windSpeed: "+0.8 m/s",
+      status: "Qualified",
+    },
+  ],
+  "100m Women Final": [
+    {
+      rank: 1,
+      athleteName: "Almaz Ayana",
+      club: "Oromia Athletics Club",
+      bib: "BIB-201",
+      timeMark: "10.92",
+      reactionTime: "0.128s",
+      windSpeed: "+0.4 m/s",
+      status: "Gold",
+      recordNote: "National Record (NR)",
+    },
+    {
+      rank: 2,
+      athleteName: "Tirunesh Dibaba",
+      club: "Defense Athletics Club",
+      bib: "BIB-205",
+      timeMark: "11.04",
+      reactionTime: "0.135s",
+      windSpeed: "+0.4 m/s",
+      status: "Silver",
+    },
+    {
+      rank: 3,
+      athleteName: "Genzebe Dibaba",
+      club: "Banks Athletics Club",
+      bib: "BIB-208",
+      timeMark: "11.18",
+      reactionTime: "0.142s",
+      windSpeed: "+0.4 m/s",
+      status: "Bronze",
+    },
+    {
+      rank: 4,
+      athleteName: "Gudaf Tsegay",
+      club: "Sidama Coffee Athletics",
+      bib: "BIB-212",
+      timeMark: "11.35",
+      reactionTime: "0.150s",
+      windSpeed: "+0.4 m/s",
+      status: "Qualified",
+    },
+    {
+      rank: 5,
+      athleteName: "Tadu Nare",
+      club: "Ethio Electric Athletics",
+      bib: "BIB-215",
+      timeMark: "11.52",
+      reactionTime: "0.155s",
+      windSpeed: "+0.4 m/s",
+      status: "Qualified",
+    },
+  ],
+  "10,000m Men Final": [
+    {
+      rank: 1,
+      athleteName: "Berihu Aregawi",
+      club: "Sidama Coffee Athletics",
+      bib: "BIB-301",
+      timeMark: "26:34.87",
+      reactionTime: "0.145s",
+      windSpeed: "+1.1 m/s",
+      status: "Gold",
+      recordNote: "Championship Record (CR)",
+    },
+    {
+      rank: 2,
+      athleteName: "Haile Gebrselassie",
+      club: "Oromia Athletics Club",
+      bib: "BIB-304",
+      timeMark: "26:45.20",
+      reactionTime: "0.148s",
+      windSpeed: "+1.1 m/s",
+      status: "Silver",
+    },
+    {
+      rank: 3,
+      athleteName: "Tewodros Seyoum",
+      club: "Defense Athletics Club",
+      bib: "BIB-308",
+      timeMark: "26:52.15",
+      reactionTime: "0.140s",
+      windSpeed: "+1.1 m/s",
+      status: "Bronze",
+    },
+    {
+      rank: 4,
+      athleteName: "Abadi Hadis",
+      club: "Ethio Electric Athletics",
+      bib: "BIB-312",
+      timeMark: "27:01.50",
+      reactionTime: "0.158s",
+      windSpeed: "+1.1 m/s",
+      status: "Qualified",
+    },
+    {
+      rank: 5,
+      athleteName: "Zersenay Tadese",
+      club: "Banks Athletics Club",
+      bib: "BIB-315",
+      timeMark: "27:15.65",
+      reactionTime: "0.152s",
+      windSpeed: "+1.1 m/s",
+      status: "Qualified",
+    },
+  ],
+};
 
 export default function ResultsPage() {
   const { theme } = useTheme();
   const [selectedEvent, setSelectedEvent] = useState("5000m Men Final");
+
+  const results = EVENT_RESULTS[selectedEvent] || EVENT_RESULTS["5000m Men Final"];
 
   return (
     <div className="space-y-6">
@@ -89,8 +200,8 @@ export default function ResultsPage() {
           </p>
         </div>
 
-        <button className="rounded-xl px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition-all active:scale-95 flex items-center gap-2 bg-[#0140A7]">
-          <span>📥</span> Export Results Bulletin (PDF / CSV)
+        <button className="rounded-xl px-4 py-2.5 text-xs font-extrabold text-white shadow-md transition-all active:scale-95 flex items-center gap-2 bg-[#0140A7] hover:bg-[#0A4870]">
+          Export Results Bulletin (PDF / CSV)
         </button>
       </div>
 
@@ -107,7 +218,7 @@ export default function ResultsPage() {
           <select
             value={selectedEvent}
             onChange={(e) => setSelectedEvent(e.target.value)}
-            className="rounded-xl px-3 py-1.5 text-xs font-bold border focus:outline-none"
+            className="rounded-xl px-3 py-1.5 text-xs font-bold border focus:outline-none focus:ring-2 focus:ring-[#0140A7]"
             style={{
               backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
               borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
@@ -138,7 +249,7 @@ export default function ResultsPage() {
         <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
           <h3 className="font-extrabold text-sm">{selectedEvent} Standings</h3>
           <span className="text-[10px] font-mono font-bold text-[#2E7D32]">
-            ✓ OFFICIAL FINISH LYNX VERIFIED
+            OFFICIAL FINISH LYNX VERIFIED
           </span>
         </div>
 
@@ -162,10 +273,10 @@ export default function ResultsPage() {
               </tr>
             </thead>
             <tbody className="divide-y" style={{ borderColor: theme === "dark" ? "#30363D" : "#F1F3F5" }}>
-              {RESULTS_DATA.map((res) => (
+              {results.map((res) => (
                 <tr key={res.rank} className="hover:bg-[var(--bg-surface-variant)] transition-colors">
                   <td className="p-4 font-mono font-extrabold text-sm">
-                    {res.rank === 1 ? "🥇 1" : res.rank === 2 ? "🥈 2" : res.rank === 3 ? "🥉 3" : res.rank}
+                    {res.rank === 1 ? "1" : res.rank === 2 ? "2" : res.rank === 3 ? "3" : res.rank}
                   </td>
                   <td className="p-4">
                     <p className="font-extrabold">{res.athleteName}</p>
@@ -185,10 +296,10 @@ export default function ResultsPage() {
                             res.status === "Gold"
                               ? "#E6A500"
                               : res.status === "Silver"
-                              ? "#8B9098"
-                              : res.status === "Bronze"
-                              ? "#C98F00"
-                              : "#2E7D32",
+                                ? "#8B9098"
+                                : res.status === "Bronze"
+                                  ? "#C98F00"
+                                  : "#2E7D32",
                         }}
                       >
                         {res.status}
