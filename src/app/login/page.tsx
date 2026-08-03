@@ -35,12 +35,12 @@ export default function LoginPage() {
 
       <div className="w-full max-w-lg space-y-6 relative z-10">
         <div className="text-center space-y-3">
-          <div
-            className="h-16 w-16 mx-auto rounded-2xl flex items-center justify-center text-white font-extrabold text-xl shadow-xl"
-            style={{ backgroundColor: "#0140A7" }}
-          >
-            EAF
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="Ethiopian Athletics Federation Logo"
+            className="h-20 w-20 mx-auto rounded-2xl object-contain shadow-xl"
+          />
           <h1 className="text-3xl font-extrabold tracking-tight">
             Federation Executive Portal
           </h1>

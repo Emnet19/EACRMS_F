@@ -12,6 +12,12 @@ export interface User {
   department: string;
 }
 
+export const DEMO_PASSWORDS: Record<string, string> = {
+  "admin@eaf.gov.et": "Admin@2026",
+  "verification@eaf.gov.et": "Audit@2026",
+  "technical@eaf.gov.et": "Tech@2026",
+};
+
 export const DEMO_USERS: User[] = [
   {
     id: "FED-001",
@@ -51,29 +57,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("eacrms_federation_user");
+    localStorage.removeItem("eacrms_federation_user");
+    const storedUser = sessionStorage.getItem("eacrms_federation_user");
     if (storedUser) {
       try {
         setUser(JSON.parse(storedUser));
       } catch (e) {
         console.error("Failed to parse stored user", e);
       }
-    } else {
-      // Default to demo user for easy access if not set
-      setUser(DEMO_USERS[0]);
-      localStorage.setItem("eacrms_federation_user", JSON.stringify(DEMO_USERS[0]));
     }
     setIsLoading(false);
   }, []);
 
   const login = (newUser: User) => {
     setUser(newUser);
-    localStorage.setItem("eacrms_federation_user", JSON.stringify(newUser));
+    sessionStorage.setItem("eacrms_federation_user", JSON.stringify(newUser));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("eacrms_federation_user");
+    sessionStorage.removeItem("eacrms_federation_user");
   };
 
   return (

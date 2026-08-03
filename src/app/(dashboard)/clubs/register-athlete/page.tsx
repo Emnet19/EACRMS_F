@@ -5,6 +5,66 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 import { useData } from "@/context/DataContext";
 
+interface FaydaProfile {
+  fullName: string;
+  fanId: string;
+  dateOfBirth: string;
+  sex: string;
+  nationality: string;
+  region: string;
+  parentName: string;
+  discipline: string;
+}
+
+const FAYDA_PROFILES: FaydaProfile[] = [
+  {
+    fullName: "Aman Woldesenbet",
+    fanId: "",
+    dateOfBirth: "2003-04-17",
+    sex: "Male",
+    nationality: "Ethiopian",
+    region: "Oromia",
+    parentName: "Woldesenbet Tulu",
+    discipline: "Long Distance",
+  },
+  {
+    fullName: "Rahel Girma",
+    fanId: "",
+    dateOfBirth: "2005-09-02",
+    sex: "Female",
+    nationality: "Ethiopian",
+    region: "Amhara",
+    parentName: "Girma Alemu",
+    discipline: "Middle Distance",
+  },
+  {
+    fullName: "Binyam Tsegaye",
+    fanId: "",
+    dateOfBirth: "2001-11-23",
+    sex: "Male",
+    nationality: "Ethiopian",
+    region: "Addis Ababa",
+    parentName: "Tsegaye Kebede",
+    discipline: "Sprints",
+  },
+  {
+    fullName: "Selamawit Desta",
+    fanId: "",
+    dateOfBirth: "2004-06-30",
+    sex: "Female",
+    nationality: "Ethiopian",
+    region: "Tigray",
+    parentName: "Desta Hailu",
+    discipline: "Marathon",
+  },
+];
+
+function fetchFaydaProfile(faydaId: string): FaydaProfile {
+  const hash = faydaId.split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  const profile = FAYDA_PROFILES[hash % FAYDA_PROFILES.length];
+  return { ...profile, fanId: faydaId };
+}
+
 export default function AthleteRegistrationPage() {
   const { theme } = useTheme();
   const { addAthlete, clubs } = useData();
@@ -13,12 +73,12 @@ export default function AthleteRegistrationPage() {
   const [selectedClubId, setSelectedClubId] = useState("");
   const [faydaId, setFaydaId] = useState("");
   const [otp, setOtp] = useState("");
+  const [faydaProfile, setFaydaProfile] = useState<FaydaProfile | null>(null);
+  const [registrationDone, setRegistrationDone] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
     temporaryPassword: "",
-    athleteName: "",
-    discipline: "",
   });
 
   const handleClubSelect = (e: React.FormEvent) => {
@@ -42,6 +102,7 @@ export default function AthleteRegistrationPage() {
       return;
     }
     console.log("Verifying OTP:", otp);
+    setFaydaProfile(fetchFaydaProfile(faydaId));
     setStep("details");
   };
 
@@ -70,10 +131,12 @@ export default function AthleteRegistrationPage() {
   const handleDetailsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!faydaProfile) return;
+
     // Add athlete to context
     addAthlete({
-      name: formData.athleteName,
-      discipline: formData.discipline,
+      name: faydaProfile.fullName,
+      discipline: faydaProfile.discipline,
       faydaId,
       status: "Active",
       email: formData.email,
@@ -81,7 +144,18 @@ export default function AthleteRegistrationPage() {
       clubId: selectedClubId,
     });
 
-    router.push("/clubs");
+    setRegistrationDone(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const resetRegistration = () => {
+    setRegistrationDone(false);
+    setStep("club");
+    setSelectedClubId("");
+    setFaydaId("");
+    setOtp("");
+    setFaydaProfile(null);
+    setFormData({ email: "", phone: "", temporaryPassword: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -102,7 +176,7 @@ export default function AthleteRegistrationPage() {
           >
             <span className="text-xl">←</span>
           </button>
-          <div className="h-10 w-10 rounded-xl bg-[#2E7D32] flex items-center justify-center text-white text-xs font-bold">
+          <div className="h-10 rounded-xl px-2.5 bg-[#2E7D32] flex items-center justify-center text-white text-[8px] font-bold tracking-tight leading-none">
             ATHLETE
           </div>
           <div>
@@ -124,6 +198,71 @@ export default function AthleteRegistrationPage() {
           backgroundColor: theme === "dark" ? "#161B22" : "#FFFFFF",
         }}
       >
+        {registrationDone ? (
+          <div className="flex flex-col items-center justify-center text-center py-8 space-y-6 animate-fadeIn">
+            <div className="h-24 w-24 rounded-full bg-[rgba(46,125,50,0.12)] flex items-center justify-center">
+              <div className="h-16 w-16 rounded-full bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] text-white flex items-center justify-center text-4xl shadow-lg">
+                ✓
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-black tracking-tight text-[var(--text-primary)]">
+                Athlete Registration Successful
+              </h2>
+              <p className="text-xs mt-1.5" style={{ color: theme === "dark" ? "#8B949E" : "#555B63" }}>
+                The athlete has been verified against the Fayda registry and added to the club roster.
+              </p>
+            </div>
+
+            <div
+              className="w-full max-w-md rounded-2xl border p-5 text-left space-y-3"
+              style={{
+                backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
+                borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+              }}
+            >
+              {[
+                ["Full Name", faydaProfile?.fullName],
+                ["Fayda National ID", faydaId],
+                ["Club", clubs.find((c) => c.id === selectedClubId)?.name],
+                ["Discipline", faydaProfile?.discipline],
+                ["Email", formData.email],
+                ["Phone", formData.phone],
+              ].map(([label, value]) => (
+                <div key={label} className="flex items-center justify-between gap-4 text-xs">
+                  <span className="font-bold opacity-60">{label}</span>
+                  <span className="font-extrabold text-right text-[var(--text-primary)]">{value}</span>
+                </div>
+              ))}
+              <div className="pt-2 border-t flex items-center justify-between gap-4 text-xs" style={{ borderColor: theme === "dark" ? "#30363D" : "#D9DEE5" }}>
+                <span className="font-bold opacity-60">Status</span>
+                <span className="rounded-full px-2.5 py-0.5 font-mono font-extrabold text-[10px] text-white bg-[#2E7D32]">ACTIVE</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
+              <button
+                onClick={() => router.push("/clubs")}
+                className="flex-1 bg-[#2E7D32] text-white py-3.5 rounded-xl font-extrabold hover:bg-[#1B5E20] transition-all shadow-lg"
+              >
+                Return to Club Roster →
+              </button>
+              <button
+                onClick={resetRegistration}
+                className="flex-1 py-3.5 rounded-xl font-extrabold transition-all border"
+                style={{
+                  backgroundColor: theme === "dark" ? "rgba(30, 41, 59, 0.3)" : "#FFFFFF",
+                  borderColor: theme === "dark" ? "rgba(51, 65, 85, 0.4)" : "rgba(226, 232, 240, 0.8)",
+                  color: theme === "dark" ? "#F8FAFC" : "#0F172A",
+                }}
+              >
+                Register Another Athlete
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-extrabold shadow-md transition-all ${step === "club" ? "bg-[#2E7D32] text-white scale-110" : ["fayda", "otp", "details"].includes(step) ? "bg-[#2E7D32] text-white" : "bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
@@ -301,46 +440,65 @@ export default function AthleteRegistrationPage() {
         {/* Step 4: Registration Details */}
         {step === "details" && (
           <form onSubmit={handleDetailsSubmit} className="space-y-5">
-            <div>
-              <label className="block text-sm font-bold mb-2">Athlete Name *</label>
-              <input
-                type="text"
-                name="athleteName"
-                value={formData.athleteName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#2E7D32] focus:border-transparent transition-all"
+            {/* Fayda Verified Identity Card */}
+            {faydaProfile && (
+              <div
+                className="rounded-2xl border-2 border-[#2E7D32] overflow-hidden"
                 style={{
                   backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
-                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-                }}
-                placeholder="Full name of athlete"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold mb-2">Discipline *</label>
-              <select
-                name="discipline"
-                value={formData.discipline}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#2E7D32] focus:border-transparent transition-all"
-                style={{
-                  backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
-                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
                 }}
               >
-                <option value="">Select Discipline</option>
-                <option value="Sprints">Sprints (100m, 200m, 400m)</option>
-                <option value="Middle Distance">Middle Distance (800m, 1500m)</option>
-                <option value="Long Distance">Long Distance (3000m, 5000m, 10000m)</option>
-                <option value="Marathon">Marathon</option>
-                <option value="Hurdles">Hurdles</option>
-                <option value="Jumps">Jumps (High, Long, Triple, Pole)</option>
-                <option value="Throws">Throws (Shot, Discus, Hammer, Javelin)</option>
-                <option value="Combined Events">Combined Events (Decathlon, Heptathlon)</option>
-              </select>
+                <div
+                  className="px-4 py-2.5 bg-[#2E7D32] text-white flex items-center justify-between"
+                >
+                  <span className="text-[10px] font-mono font-extrabold tracking-widest uppercase">FAYDA Verified Identity</span>
+                  <span className="text-[9px] font-mono font-extrabold bg-white/20 px-2 py-0.5 rounded-full">✓ VERIFIED</span>
+                </div>
+                <div className="p-4 flex flex-col sm:flex-row gap-4">
+                  <div className="shrink-0">
+                    <div
+                      className="h-16 w-16 rounded-xl bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] text-white flex items-center justify-center font-black text-xl"
+                    >
+                      {faydaProfile.fullName.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                    </div>
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-extrabold text-base text-[var(--text-primary)]">{faydaProfile.fullName}</p>
+                        <p className="text-[10px] font-mono font-bold text-[#2E7D32] mt-0.5">{faydaProfile.fanId}</p>
+                      </div>
+                      <span className="rounded-full px-2.5 py-1 text-[9px] font-mono font-extrabold bg-[rgba(46,125,50,0.12)] text-[#2E7D32]">
+                        {faydaProfile.sex}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs">
+                      <p><span className="font-semibold opacity-60">DATE OF BIRTH:</span> <span className="font-bold text-[var(--text-primary)]">{faydaProfile.dateOfBirth}</span></p>
+                      <p><span className="font-semibold opacity-60">NATIONALITY:</span> <span className="font-bold text-[var(--text-primary)]">{faydaProfile.nationality}</span></p>
+                      <p><span className="font-semibold opacity-60">REGION:</span> <span className="font-bold text-[var(--text-primary)]">{faydaProfile.region}</span></p>
+                      <p><span className="font-semibold opacity-60">DISCIPLINE:</span> <span className="font-bold text-[var(--text-primary)]">{faydaProfile.discipline}</span></p>
+                      <p className="col-span-2"><span className="font-semibold opacity-60">PARENT NAME:</span> <span className="font-bold text-[var(--text-primary)]">{faydaProfile.parentName}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div>
+              <label className="block text-sm font-bold mb-2">Phone Number *</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#2E7D32] focus:border-transparent transition-all"
+                style={{
+                  backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                }}
+                placeholder="+251 9XX XXX XXX"
+              />
             </div>
 
             <div>
@@ -357,23 +515,6 @@ export default function AthleteRegistrationPage() {
                   borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
                 }}
                 placeholder="athlete@example.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold mb-2">Phone Number *</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#2E7D32] focus:border-transparent transition-all"
-                style={{
-                  backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
-                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
-                }}
-                placeholder="+251 9XX XXX XXX"
               />
             </div>
 
@@ -416,6 +557,8 @@ export default function AthleteRegistrationPage() {
               </button>
             </div>
           </form>
+        )}
+          </>
         )}
       </div>
     </div>

@@ -5,6 +5,37 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 import { useData } from "@/context/DataContext";
 
+const CLUB_NAMES = [
+  "Addis Ababa Athletics Club",
+  "Oromia Athletics Club",
+  "Amhara Athletics Club",
+  "Tigray Athletics Club",
+  "Sidama Coffee Athletics",
+  "Defense Athletics Club",
+  "Ethio Electric Athletics",
+  "Banks Athletics Club",
+  "Mugher Cement Athletics Club",
+  "CBE Athletics Club",
+  "Ethiopian Police Athletics Club",
+  "Armed Forces Athletics Club",
+  "Fedele Athletics Club",
+  "National Tobacco Athletics Club",
+];
+
+const CLUB_ADDRESSES = [
+  "Addis Ababa Stadium, Addis Ababa",
+  "Bahir Dar Stadium, Bahir Dar",
+  "Hawassa International Stadium, Hawassa",
+  "Dire Dawa Stadium, Dire Dawa",
+  "Mekelle Stadium, Mekelle",
+  "Gondar Stadium, Gondar",
+  "Jimma Stadium, Jimma",
+  "Harar Stadium, Harar",
+  "Meskel Square Circuit, Addis Ababa",
+  "Millennium Hall, Addis Ababa",
+  "National Athletics Training Center, Sululta",
+];
+
 export default function ClubRegistrationPage() {
   const { theme } = useTheme();
   const { addClub } = useData();
@@ -17,6 +48,8 @@ export default function ClubRegistrationPage() {
     contactPhone: "",
     address: "",
   });
+  const [clubNameMode, setClubNameMode] = useState<"select" | "other">("select");
+  const [addressMode, setAddressMode] = useState<"select" | "other">("select");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,19 +107,47 @@ export default function ClubRegistrationPage() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-bold mb-2">Club Name *</label>
-            <input
-              type="text"
-              name="clubName"
-              value={formData.clubName}
-              onChange={handleChange}
+            <select
+              value={clubNameMode === "other" ? "__other__" : formData.clubName}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val === "__other__") {
+                  setClubNameMode("other");
+                  setFormData({ ...formData, clubName: "" });
+                } else {
+                  setClubNameMode("select");
+                  setFormData({ ...formData, clubName: val });
+                }
+              }}
               required
               className="w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#0140A7] focus:border-transparent transition-all"
               style={{
                 backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
                 borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
               }}
-              placeholder="e.g., Oromia Athletics Club"
-            />
+            >
+              <option value="">Select Club Name...</option>
+              {CLUB_NAMES.map((name) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+              <option value="__other__">Other (type a new club name)...</option>
+            </select>
+            {clubNameMode === "other" && (
+              <input
+                type="text"
+                value={formData.clubName}
+                onChange={(e) => setFormData({ ...formData, clubName: e.target.value })}
+                required
+                className="w-full mt-2 px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#0140A7] focus:border-transparent transition-all"
+                style={{
+                  backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                }}
+                placeholder="e.g., Oromia Athletics Club"
+              />
+            )}
           </div>
 
           <div>
@@ -175,19 +236,47 @@ export default function ClubRegistrationPage() {
 
           <div>
             <label className="block text-sm font-bold mb-2">Club Address *</label>
-            <input
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
+            <select
+              value={addressMode === "other" ? "__other__" : formData.address}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val === "__other__") {
+                  setAddressMode("other");
+                  setFormData({ ...formData, address: "" });
+                } else {
+                  setAddressMode("select");
+                  setFormData({ ...formData, address: val });
+                }
+              }}
               required
               className="w-full px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#0140A7] focus:border-transparent transition-all"
               style={{
                 backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
                 borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
               }}
-              placeholder="Full club address"
-            />
+            >
+              <option value="">Select Club Address...</option>
+              {CLUB_ADDRESSES.map((address) => (
+                <option key={address} value={address}>
+                  {address}
+                </option>
+              ))}
+              <option value="__other__">Other (type a custom address)...</option>
+            </select>
+            {addressMode === "other" && (
+              <input
+                type="text"
+                value={formData.address}
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                required
+                className="w-full mt-2 px-4 py-3 rounded-xl border-2 focus:outline-none focus:ring-2 focus:ring-[#0140A7] focus:border-transparent transition-all"
+                style={{
+                  backgroundColor: theme === "dark" ? "#0D1117" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                }}
+                placeholder="Full club address"
+              />
+            )}
           </div>
 
           <div className="flex gap-3 pt-4">

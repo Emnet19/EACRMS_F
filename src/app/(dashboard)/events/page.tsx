@@ -66,8 +66,14 @@ export default function EventsPage() {
   const [eventsList, setEventsList] = useState<RaceEvent[]>(EVENTS);
   const [newEventName, setNewEventName] = useState("");
   const [newEventCategory, setNewEventCategory] = useState<"Track" | "Field" | "Road">("Track");
+  const [newEventVenue, setNewEventVenue] = useState("");
+  const [newEventDate, setNewEventDate] = useState("");
+  const [newEventTime, setNewEventTime] = useState("");
+  const [newEventEntries, setNewEventEntries] = useState("");
+  const [newEventTiming, setNewEventTiming] = useState("FinishLynx OptiOj-902");
   const [isAdding, setIsAdding] = useState(false);
   const [seedingEvent, setSeedingEvent] = useState<RaceEvent | null>(null);
+  const [createSuccess, setCreateSuccess] = useState<string | null>(null);
 
   const handleCreateEvent = (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,17 +83,25 @@ export default function EventsPage() {
       id: `EVT-${Math.floor(100 + Math.random() * 900)}`,
       name: newEventName,
       category: newEventCategory,
-      scheduledTime: "17:00 EAT Today",
-      venue: "Addis Ababa Stadium",
+      scheduledTime: `${newEventTime || "17:00"} EAT • ${newEventDate || "Today"}`,
+      venue: newEventVenue || "Addis Ababa Stadium",
       status: "Scheduled",
-      entriesCount: 8,
+      entriesCount: parseInt(newEventEntries || "8", 10),
       windSpeed: "+0.0 m/s",
-      timingDevice: "FinishLynx Camera 02",
+      timingDevice: newEventTiming,
     };
 
     setEventsList([created, ...eventsList]);
+    setCreateSuccess(
+      `Event "${created.name}" created successfully as ${created.id} at ${created.venue}. It is now shown at the top of the schedule below.`
+    );
     setNewEventName("");
+    setNewEventVenue("");
+    setNewEventDate("");
+    setNewEventTime("");
+    setNewEventEntries("");
     setIsAdding(false);
+    setTimeout(() => setCreateSuccess(null), 6000);
   };
 
   return (
@@ -115,6 +129,13 @@ export default function EventsPage() {
         </button>
       </div>
 
+      {/* Creation Success Banner */}
+      {createSuccess && (
+        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-[#10B981] text-xs font-bold flex items-center gap-2.5 animate-fadeIn shadow-sm">
+          <span>✅</span> {createSuccess}
+        </div>
+      )}
+
       {/* Add Event Form Modal / Expandable */}
       {isAdding && (
         <form
@@ -128,12 +149,13 @@ export default function EventsPage() {
           <h3 className="font-extrabold text-base">New Championship Race Event</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold block mb-1">Event Title</label>
+              <label className="text-xs font-bold block mb-1">Event Title *</label>
               <input
                 type="text"
                 value={newEventName}
                 onChange={(e) => setNewEventName(e.target.value)}
                 placeholder="e.g. 800m Men Semi-Final"
+                required
                 className="w-full rounded-xl px-4 py-2 text-xs border focus:outline-none"
                 style={{
                   backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
@@ -143,7 +165,7 @@ export default function EventsPage() {
               />
             </div>
             <div>
-              <label className="text-xs font-bold block mb-1">Category</label>
+              <label className="text-xs font-bold block mb-1">Category *</label>
               <select
                 value={newEventCategory}
                 onChange={(e) => setNewEventCategory(e.target.value as "Track" | "Field" | "Road")}
@@ -157,6 +179,88 @@ export default function EventsPage() {
                 <option value="Track">Track Event</option>
                 <option value="Field">Field Event</option>
                 <option value="Road">Road Race</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-bold block mb-1">Venue *</label>
+              <input
+                type="text"
+                value={newEventVenue}
+                onChange={(e) => setNewEventVenue(e.target.value)}
+                placeholder="e.g. Addis Ababa Stadium"
+                required
+                className="w-full rounded-xl px-4 py-2 text-xs border focus:outline-none"
+                style={{
+                  backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                  color: "inherit",
+                }}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold block mb-1">Number of Entries *</label>
+              <input
+                type="number"
+                min={1}
+                max={140}
+                value={newEventEntries}
+                onChange={(e) => setNewEventEntries(e.target.value)}
+                placeholder="e.g. 8"
+                required
+                className="w-full rounded-xl px-4 py-2 text-xs border focus:outline-none"
+                style={{
+                  backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                  color: "inherit",
+                }}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold block mb-1">Date *</label>
+              <input
+                type="date"
+                value={newEventDate}
+                onChange={(e) => setNewEventDate(e.target.value)}
+                required
+                className="w-full rounded-xl px-4 py-2 text-xs border focus:outline-none"
+                style={{
+                  backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                  color: "inherit",
+                }}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold block mb-1">Start Time (EAT) *</label>
+              <input
+                type="time"
+                value={newEventTime}
+                onChange={(e) => setNewEventTime(e.target.value)}
+                required
+                className="w-full rounded-xl px-4 py-2 text-xs border focus:outline-none"
+                style={{
+                  backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                  color: "inherit",
+                }}
+              />
+            </div>
+            <div className="sm:col-span-2">
+              <label className="text-xs font-bold block mb-1">Timing Device *</label>
+              <select
+                value={newEventTiming}
+                onChange={(e) => setNewEventTiming(e.target.value)}
+                className="w-full rounded-xl px-4 py-2 text-xs border focus:outline-none"
+                style={{
+                  backgroundColor: theme === "dark" ? "#21262D" : "#F7F8FA",
+                  borderColor: theme === "dark" ? "#30363D" : "#D9DEE5",
+                  color: "inherit",
+                }}
+              >
+                <option value="FinishLynx OptiOj-902">FinishLynx OptiOj-902</option>
+                <option value="FinishLynx Camera 02">FinishLynx Camera 02</option>
+                <option value="RFID Transponder Array">RFID Transponder Array</option>
+                <option value="Manual Stopwatch Backup">Manual Stopwatch Backup</option>
               </select>
             </div>
           </div>
